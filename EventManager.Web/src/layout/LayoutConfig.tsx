@@ -97,13 +97,13 @@ export const PrivatePages: IPages[] = [
 ];
 
 export const profileProps: ProfileProps = {
-  name: "Navodayan's App",
+  name: "Samagam",
   avatar: ImagePath.logo,
   bio: "Connecting Navodayans!",
 };
 
 export const footerProps: FooterProps = {
-  copyrightOwner: "Alumni App",
+  copyrightOwner: "Samagam",
   aboutUrl: Pathname.About,
   licenseUrl: Pathname.License,
   privacyPolicyUrl: Pathname.Privacy,
@@ -123,7 +123,7 @@ export const sidebarNavFooterProps: SidebarNavFooterProps = {
 
 export const topbarProps: TopbarProps = {
   logoUrl: "",
-  siteTitle: "Navodayan's App",
+  siteTitle: "Samagam",
   onSidebarOpen: function () {
     throw new Error("Function not implemented.");
   }

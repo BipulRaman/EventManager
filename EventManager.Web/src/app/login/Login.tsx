@@ -165,7 +165,7 @@ export const Login: React.FC<LoginProps> = (props) => {
               height={100}
               style={alignSelfCenter}
             />
-            <Typography variant='h6' style={alignSelfCenter}>Login to Alumni Portal</Typography>
+            <Typography variant='h6' style={alignSelfCenter}>Login to Portal</Typography>
             <TextField
               id='user-email'
               label='Email'
