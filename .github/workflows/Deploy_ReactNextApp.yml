@@ -32,5 +32,5 @@ jobs:
           source-directory: 'EventManager.Web/out'
           target-branch: 'web'
           destination-github-username: 'BipulRaman'
-          destination-repository-name: 'nvsalumni.in'
+          destination-repository-name: 'EventManagerWeb'
           user-email: 'bipulraman@gmail.com'
