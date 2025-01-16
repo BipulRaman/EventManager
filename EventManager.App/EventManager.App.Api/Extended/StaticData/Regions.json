@@ -1,0 +1,86 @@
+[
+  {
+    "region_id": 1,
+    "region_name": "Bhopal",
+    "states": [
+      "MADHYA PRADESH",
+      "CHHATTISGARH",
+      "ODISHA"
+    ]
+  },
+  {
+    "region_id": 2,
+    "region_name": "Chandigarh",
+    "states": [
+      "CHANDIGARH",
+      "HIMACHAL PRADESH",
+      "JAMMU & KASHMIR",
+      "PUNJAB",
+      "Ladakh"
+    ]
+  },
+  {
+    "region_id": 3,
+    "region_name": "Hyderabad",
+    "states": [
+      "ANDHRA PRADESH",
+      "TELANGANA",
+      "ANDAMAN  & NICOBAR",
+      "KARNATAKA",
+      "KERALA",
+      "LAKSHADWEEP",
+      "PONDICHERRY"
+    ]
+  },
+  {
+    "region_id": 4,
+    "region_name": "Jaipur",
+    "states": [
+      "DELHI",
+      "HARYANA",
+      "RAJASTHAN"
+    ]
+  },
+  {
+    "region_id": 5,
+    "region_name": "Lucknow",
+    "states": [
+      "UTTAR PRADESH",
+      "UTTARAKHAND"
+    ]
+  },
+  {
+    "region_id": 6,
+    "region_name": "Patna",
+    "states": [
+      "BIHAR",
+      "JHARKHAND",
+      "WEST BENGAL"
+    ]
+  },
+  {
+    "region_id": 7,
+    "region_name": "Pune",
+    "states": [
+      "MAHARASHTRA",
+      "GUJARAT",
+      "GOA",
+      "DAMAN & DIU",
+      "DADRA & NAGAR HAVELI"
+    ]
+  },
+  {
+    "region_id": 8,
+    "region_name": "Shillong",
+    "states": [
+      "MEGHALAYA",
+      "ASSAM",
+      "MANIPUR",
+      "ARUNACHAL PRADESH",
+      "NAGALAND",
+      "MIZORAM",
+      "TRIPURA",
+      "SIKKIM"
+    ]
+  }
+]

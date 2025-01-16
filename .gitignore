@@ -1,0 +1,5 @@
+
+*.pubxml
+*appsettings.Development.json
+*appsettings.local.json
+*appsettings.Development.json

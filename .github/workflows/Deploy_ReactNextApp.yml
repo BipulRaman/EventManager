@@ -1,0 +1,36 @@
+name: Build and Deploy WebApp to Github CDN
+
+on:
+  push:
+    paths:
+      - 'EventManager.Web/**'
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'yarn'    
+          cache-dependency-path: 'EventManager.Web/yarn.lock'      
+      - run: yarn install
+        working-directory: EventManager.Web
+      - run: yarn build
+        working-directory: EventManager.Web
+      
+      - name: Pushes to another repository  🚀
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'EventManager.Web/out'
+          target-branch: 'web'
+          destination-github-username: 'BipulRaman'
+          destination-repository-name: 'nvsalumni.in'
+          user-email: 'bipulraman@gmail.com'
