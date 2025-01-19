@@ -92,6 +92,13 @@ public class ProfileData : BaseData
     [JsonIgnore]
     public string SecurityKey { get; set; }
 
+    // Additional properties for Events
+    public DateTimeOffset? VenueCheckInDateTime { get; set; }
+
+    public DateTimeOffset? GiftCheckInDateTime { get; set; }
+
+    public DateTimeOffset? MealCheckInDateTime { get; set; }
+
     /// <summary>
     /// Vaidate the UserInfo object.
     /// </summary>

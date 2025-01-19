@@ -61,6 +61,12 @@ public class ProfileEntity : BaseEntity
 
     public string SecurityKey { get; set; }
 
+    public DateTimeOffset? VenueCheckInDateTime { get; set; }
+
+    public DateTimeOffset? GiftCheckInDateTime { get; set; }
+
+    public DateTimeOffset? MealCheckInDateTime { get; set; }
+
     public static implicit operator ProfileData(ProfileEntity userEntity)
     {
         if (userEntity is not null)
@@ -101,6 +107,9 @@ public class ProfileEntity : BaseEntity
                 CreatedBy = userEntity.CreatedBy,
                 CreatedByName = userEntity.CreatedByName,
                 ModifiedBy = userEntity.ModifiedBy,
+                VenueCheckInDateTime = userEntity.VenueCheckInDateTime,
+                GiftCheckInDateTime = userEntity.GiftCheckInDateTime,
+                MealCheckInDateTime = userEntity.MealCheckInDateTime,
             };
         }
         else

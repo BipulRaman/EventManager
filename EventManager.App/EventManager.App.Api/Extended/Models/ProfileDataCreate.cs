@@ -92,6 +92,9 @@ public class ProfileDataCreate : ProfileData
             IsWorking = profileData.IsWorking,
             Organisation = profileData.Organization,
             JobTitle = profileData.JobTitle,
+            VenueCheckInDateTime = profileData.VenueCheckInDateTime,
+            GiftCheckInDateTime = profileData.GiftCheckInDateTime,
+            MealCheckInDateTime = profileData.MealCheckInDateTime,
         };
     }
 }

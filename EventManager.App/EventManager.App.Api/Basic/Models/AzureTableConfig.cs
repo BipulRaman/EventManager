@@ -36,6 +36,11 @@ public class AzureTableConfig
     public string EventsTable { get; set; }
 
     /// <summary>
+    /// Gets or sets the table name for Expenses in Azure Table Storage.
+    /// </summary>
+    public string ExpensesTable { get; set; }
+
+    /// <summary>
     /// Gets or sets the table name for Business in Azure Table Storage.
     /// </summary>
     public string BusinessesTable { get; set; }
