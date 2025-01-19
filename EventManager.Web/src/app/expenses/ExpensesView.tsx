@@ -24,6 +24,7 @@ export const ExpensesView: React.FunctionComponent = () => {
                 businessStateList.data.length > 0 ? (
                     businessStateList.data.map((business, index) => (
                         // <BusinessDisplay key={index} {...business} />
+                        <span key={index}>Hello</span>
                     ))
                 ) : (
                     <PageCard><Typography variant="body1">You have not added your business yet. Add it now at <Link href={Pathname.Business_Add}>Add Business</Link> page.</Typography></PageCard>
