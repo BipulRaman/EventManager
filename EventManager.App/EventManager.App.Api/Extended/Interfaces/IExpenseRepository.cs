@@ -2,7 +2,7 @@
 
 namespace EventManager.App.Api.Extended.Interfaces;
 
-public interface IExpensesRepository
+public interface IExpenseRepository
 {
     /// <summary>
     /// Get Expense by id.

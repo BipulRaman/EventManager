@@ -7,12 +7,12 @@ using System.Net;
 
 namespace EventManager.App.Api.Extended.Services;
 
-public class ExpensesHandler : IExpenseHandler
+public class ExpenseHandler : IExpenseHandler
 {
-    private readonly IExpensesRepository expenseRepository;
-    private readonly ILogger<ExpensesHandler> logger;
+    private readonly IExpenseRepository expenseRepository;
+    private readonly ILogger<ExpenseHandler> logger;
 
-    public ExpensesHandler(IExpensesRepository expenseRepository, ILogger<ExpensesHandler> logger)
+    public ExpenseHandler(IExpenseRepository expenseRepository, ILogger<ExpenseHandler> logger)
     {
         this.expenseRepository = expenseRepository;
         this.logger = logger;
@@ -21,7 +21,7 @@ public class ExpensesHandler : IExpenseHandler
     /// <inheritdoc/>
     public OpResult<List<ExpenseData>> GetExpenses(HttpContext httpContext)
     {
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(GetExpenses)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(GetExpenses)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         OpResult<List<ExpenseData>> opResult = new OpResult<List<ExpenseData>>()
         {
             Status = HttpStatusCode.InternalServerError,
@@ -38,17 +38,17 @@ public class ExpensesHandler : IExpenseHandler
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"{nameof(ExpensesHandler)}.{nameof(GetExpenses)} => Error occurred while fetching Expenses for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+            logger.LogError(ex, $"{nameof(ExpenseHandler)}.{nameof(GetExpenses)} => Error occurred while fetching Expenses for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         }
 
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(GetExpenses)} => Method completed for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(GetExpenses)} => Method completed for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         return opResult;
     }
 
     /// <inheritdoc/>
     public OpResult<ExpenseData> GetExpense(HttpContext httpContext, string expenseId)
     {
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(GetExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(GetExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         OpResult<ExpenseData> opResult = new OpResult<ExpenseData>()
         {
             Status = HttpStatusCode.InternalServerError,
@@ -72,17 +72,17 @@ public class ExpensesHandler : IExpenseHandler
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"{nameof(ExpensesHandler)}.{nameof(GetExpense)} => Error occurred while fetching Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+            logger.LogError(ex, $"{nameof(ExpenseHandler)}.{nameof(GetExpense)} => Error occurred while fetching Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         }
 
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(GetExpense)} => Method completed for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(GetExpense)} => Method completed for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         return opResult;
     }
 
     /// <inheritdoc/>
     public OpResult<ExpenseData> CreateExpense(HttpContext httpContext, ExpenseData rawExpenseData)
     {
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(CreateExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(CreateExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         OpResult<ExpenseData> opResult = new OpResult<ExpenseData>()
         {
             Status = HttpStatusCode.InternalServerError,
@@ -116,17 +116,17 @@ public class ExpensesHandler : IExpenseHandler
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"{nameof(ExpensesHandler)}.{nameof(CreateExpense)} => Error occurred while creating Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+            logger.LogError(ex, $"{nameof(ExpenseHandler)}.{nameof(CreateExpense)} => Error occurred while creating Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         }
 
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(CreateExpense)} => Method completed for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(CreateExpense)} => Method completed for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         return opResult;
     }
 
     /// <inheritdoc/>
     public OpResult<ExpenseData> UpdateExpense(HttpContext httpContext, ExpenseData expenseData)
     {
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(UpdateExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(UpdateExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         OpResult<ExpenseData> opResult = new OpResult<ExpenseData>()
         {
             Status = HttpStatusCode.InternalServerError,
@@ -160,7 +160,7 @@ public class ExpensesHandler : IExpenseHandler
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"{nameof(ExpensesHandler)}.{nameof(UpdateExpense)} => Error occurred while updating Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+            logger.LogError(ex, $"{nameof(ExpenseHandler)}.{nameof(UpdateExpense)} => Error occurred while updating Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         }
         return opResult;
     }
@@ -168,7 +168,7 @@ public class ExpensesHandler : IExpenseHandler
     /// <inheritdoc/>
     public OpResult<bool> DeleteExpense(HttpContext httpContext, string expenseId)
     {
-        logger.LogInformation($"{nameof(ExpensesHandler)}.{nameof(DeleteExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+        logger.LogInformation($"{nameof(ExpenseHandler)}.{nameof(DeleteExpense)} => Method started for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         OpResult<bool> opResult = new OpResult<bool>()
         {
             Result = false,
@@ -203,7 +203,7 @@ public class ExpensesHandler : IExpenseHandler
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"{nameof(ExpensesHandler)}.{nameof(DeleteExpense)} => Error occurred while deleting Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
+            logger.LogError(ex, $"{nameof(ExpenseHandler)}.{nameof(DeleteExpense)} => Error occurred while deleting Expense for User: {ContextHelper.GetLoggedInUser(httpContext)?.Id}");
         }
         return opResult;
     }

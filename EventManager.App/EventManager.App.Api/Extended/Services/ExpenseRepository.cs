@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace EventManager.App.Api.Extended.Services;
 
-public class ExpenseRepository : IExpensesRepository
+public class ExpenseRepository : IExpenseRepository
 {
     private readonly TableClient tableClient;
 

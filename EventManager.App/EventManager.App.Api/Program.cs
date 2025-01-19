@@ -49,6 +49,9 @@ builder.Services.AddSingleton<IBusinessHandler, BusinessHandler>();
 builder.Services.AddSingleton<IMentorshipHandler, MentorshipHandler>();
 builder.Services.AddSingleton<IEventsHandler, EventsHandler>();
 
+builder.Services.AddSingleton<IExpenseRepository, ExpenseRepository>();
+builder.Services.AddSingleton<IExpenseHandler, ExpenseHandler>();
+
 var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())
