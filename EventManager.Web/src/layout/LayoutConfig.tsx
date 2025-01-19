@@ -1,11 +1,8 @@
 "use client";
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import BusinessIcon from '@mui/icons-material/Business';
 import PersonIcon from '@mui/icons-material/Person';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
-import SecurityIcon from '@mui/icons-material/Security';
-import BadgeIcon from '@mui/icons-material/Badge';
 import { ImagePath } from "../constants/StaticFiles";
 import { IPages } from "./child/Sidebar/child/SidebarNav";
 import { ProfileLinks } from "../constants/ExternalLinks";
@@ -14,7 +11,8 @@ import { FooterProps } from "./child/Footer";
 import { TopbarProps } from "./child/Topbar";
 import { SidebarNavFooterProps } from "./child/Sidebar/child/SidebarNavFooter";
 import { Pathname } from "../constants/Routes";
-import SearchIcon from '@mui/icons-material/Search';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 export const PublicPages: IPages[] = [
   {
@@ -23,42 +21,47 @@ export const PublicPages: IPages[] = [
     icon: <HomeIcon />,
   },
   {
-    title: "Profile",
+    title: "My Profile",
     href: Pathname.Profile,
     icon: <PersonIcon />,
   },
   {
-    title: "NearBy",
-    href: Pathname.NearBy,
-    icon: <SearchIcon />,
+    title: "Expenses",
+    href: Pathname.Expenses,
+    icon: <CurrencyRupeeIcon />,
   },
   {
-    title: "Business",
-    href: Pathname.Business,
-    icon: <BusinessIcon />,
+    title: "CheckIn",
+    href: Pathname.CheckIn,
+    icon: <HowToRegIcon />,
   },
+  // {
+  //   title: "NearBy",
+  //   href: Pathname.NearBy,
+  //   icon: <SearchIcon />,
+  // },
+  // {
+  //   title: "Business",
+  //   href: Pathname.Business,
+  //   icon: <BusinessIcon />,
+  // },
 ];
 
 export const BottomNavPages: IPages[] = [
   {
-    title: "Profile",
+    title: "My Profile",
     href: Pathname.Profile,
     icon: <PersonIcon />,
   },
   {
-    title: "NearBy",
-    href: Pathname.NearBy,
-    icon: <SearchIcon />,
+    title: "Expenses",
+    href: Pathname.Expenses,
+    icon: <CurrencyRupeeIcon />,
   },
   {
-    title: "Business",
-    href: Pathname.Business,
-    icon: <BusinessIcon />,
-  },
-  {
-    title: "Identity",
-    href: Pathname.Identity,
-    icon: <BadgeIcon />,
+    title: "CheckIn",
+    href: Pathname.CheckIn,
+    icon: <HowToRegIcon />,
   },
 ];
 
@@ -79,16 +82,16 @@ export const AdminPages: IPages[] = [
 ];
 
 export const PrivatePages: IPages[] = [
-  {
-    title: "Identity",
-    href: Pathname.Identity,
-    icon: <BadgeIcon />,
-  },
-  {
-    title: "Security",
-    href: Pathname.Security,
-    icon: <SecurityIcon />,
-  },
+  // {
+  //   title: "Identity",
+  //   href: Pathname.Identity,
+  //   icon: <BadgeIcon />,
+  // },
+  // {
+  //   title: "Security",
+  //   href: Pathname.Security,
+  //   icon: <SecurityIcon />,
+  // },
   {
     title: "Logout",
     href: Pathname.Logout,

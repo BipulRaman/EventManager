@@ -81,7 +81,7 @@ export const IdentityDisplay = (props: PublicProfileResult) => {
             <Divider />
             <CardContent>
                 <div style={nameTextStyle}>{props.photo ? props.name : "[ Upload Photo ]"}</div>
-                <div style={userIdStyle}>https://nvsalumni.in | Navodaya Alumni Network</div>
+                {/* <div style={userIdStyle}>https://nvsalumni.in | Navodaya Alumni Network</div> */}
                 <div style={userIdStyle}>{props.id}</div>
                 <Stack direction="row" justifyContent={'flex-start'} spacing={1} paddingTop={1}>
                     <div>

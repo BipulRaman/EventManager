@@ -12,6 +12,9 @@ export enum Pathname {
     Business = '/business',
     Business_Add = '/business/add',
     Business_Edit = '/business/edit',
+    Expenses = '/expenses',
+    Expenses_Add = '/expenses/add',
+    CheckIn = '/checkin',
     Notifications = '/notifications',
     Events = '/events',
     Mentorship = '/mentorship',
@@ -65,6 +68,15 @@ export const NewsfeedTabs = [
     { label: 'Feed', path: Pathname.Newsfeed },
     { label: 'Manage', path: Pathname.Newsfeed_Manage },
     { label: 'Create', path: Pathname.Newsfeed_Create },
+];
+
+export const ExpensesTabs = [
+    { label: 'Expenses', path: Pathname.Expenses },
+    { label: 'Add', path: Pathname.Expenses_Add },
+];
+
+export const CheckInTabs = [
+    { label: 'Check-In', path: Pathname.CheckIn },
 ];
 
 export const RoutesMetadata = [
