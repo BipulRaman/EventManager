@@ -64,13 +64,13 @@ public class ProfileController : Controller
 
     [Authorize(Roles = nameof(Role.CheckIn))]
     [HttpGet("phone/{phoneNumber}")]
-    [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.Unauthorized)]
-    [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.InternalServerError)]
+    [ProducesResponseType(typeof(OpResult<List<ProfileData>>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(OpResult<List<ProfileData>>), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(OpResult<List<ProfileData>>), (int)HttpStatusCode.InternalServerError)]
     public IActionResult GetUsersByPhone(string phoneNumber)
     {
         logger.LogInformation($"{nameof(ProfileController)}.{nameof(GetUserProfile)} => Started by User: {ContextHelper.GetLoggedInUser(HttpContext)?.Id}.");
-        OpResult<List<ProfileDataPublic>> opResult = profileHandler.GetPeopleByPhone(phoneNumber);
+        OpResult<List<ProfileData>> opResult = profileHandler.GetPeopleByPhone(phoneNumber);
         logger.LogInformation($"{nameof(ProfileController)}.{nameof(GetUserProfile)} => Completed. Response => Status: {opResult.Status}; ErrorCode: {opResult.ErrorCode}.");
         return StatusCode((int)HttpStatusCode.OK, opResult);
     }

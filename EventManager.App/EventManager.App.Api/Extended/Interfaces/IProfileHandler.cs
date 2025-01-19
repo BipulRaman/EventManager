@@ -64,7 +64,7 @@ public interface IProfileHandler
     /// </summary>
     /// <param name="phone"></param>
     /// <returns></returns>
-    OpResult<List<ProfileDataPublic>> GetPeopleByPhone(string phone);
+    OpResult<List<ProfileData>> GetPeopleByPhone(string phone);
 
     /// <summary>
     /// Check in to the venue.

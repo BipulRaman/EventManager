@@ -7,7 +7,7 @@ public class ExpenseEntity : BaseEntity
     public string Title { get; set; }
 
     public float Amount { get; set; }
-    public DateTimeOffset Date { get; set; }
+    public DateTimeOffset DateTime { get; set; }
 
     public static implicit operator ExpenseData(ExpenseEntity entity)
     {
@@ -16,7 +16,7 @@ public class ExpenseEntity : BaseEntity
             Id = entity.RowKey,
             Title = entity.Title,
             Amount = entity.Amount,
-            Date = entity.Date,
+            DateTime = entity.DateTime,
             CreatedAt = entity.CreatedAt,
             ModifiedAt = entity.Timestamp,
             CreatedBy = entity.CreatedBy,

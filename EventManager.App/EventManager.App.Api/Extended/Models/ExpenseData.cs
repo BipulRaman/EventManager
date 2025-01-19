@@ -12,14 +12,14 @@ public class ExpenseData : BaseData
     [JsonPropertyName("amount")]
     public float Amount { get; set; }
 
-    [JsonPropertyName("date")]
-    public DateTimeOffset Date { get; set; }
+    [JsonPropertyName("dateTime")]
+    public DateTimeOffset DateTime { get; set; }
 
     public bool IsValidToCreate()
     {
         return !string.IsNullOrWhiteSpace(Title)
             && Amount != 0
-            && Date != DateTimeOffset.MinValue;
+            && DateTime != DateTimeOffset.MinValue;
     }
 
     public bool IsValidToUpdate()
@@ -27,20 +27,20 @@ public class ExpenseData : BaseData
         return !string.IsNullOrWhiteSpace(Id)
             && !string.IsNullOrWhiteSpace(Title)
             && Amount != 0
-            && Date != DateTimeOffset.MinValue;
+            && DateTime != DateTimeOffset.MinValue;
     }
 
     public ExpenseEntity ConvertToCreateEntity(HttpContext httpContext)
     {
         User contextUserData = httpContext.Items[NameConstants.USER_KEY] as User;
-        DateTime dateTime = DateTime.UtcNow;
+        DateTime dateTime = System.DateTime.UtcNow;
         return new ExpenseEntity
         {
             PartitionKey = contextUserData.Id,
             RowKey = Guid.NewGuid().ToString(),
             Title = Title,
             Amount = Amount,
-            Date = Date,
+            DateTime = DateTime,
             CreatedAt = new DateTimeOffset(dateTime),
             Timestamp = new DateTimeOffset(dateTime),
             CreatedBy = contextUserData.Id,
@@ -58,7 +58,7 @@ public class ExpenseData : BaseData
             RowKey = Id,
             Title = Title,
             Amount = Amount,
-            Date = Date,
+            DateTime = DateTime,
             ModifiedBy = contextUserData.Id
         };
     }

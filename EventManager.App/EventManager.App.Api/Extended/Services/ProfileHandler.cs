@@ -302,10 +302,10 @@ public class ProfileHandler : IProfileHandler
         return opResult;
     }
 
-    public OpResult<List<ProfileDataPublic>> GetPeopleByPhone(string phone)
+    public OpResult<List<ProfileData>> GetPeopleByPhone(string phone)
     {
         logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(GetPeopleByPhone)} => Method started.");
-        OpResult<List<ProfileDataPublic>> opResult = new OpResult<List<ProfileDataPublic>>()
+        OpResult<List<ProfileData>> opResult = new OpResult<List<ProfileData>>()
         {
             Status = HttpStatusCode.InternalServerError,
             ErrorCode = ErrorCode.Common_InternalServerError,
@@ -314,10 +314,10 @@ public class ProfileHandler : IProfileHandler
         try
         {
             List<ProfileEntity> profileEntities = profileRepository.GetUsersByPhone(phone);
-            List<ProfileDataPublic> profileDataPublics = new List<ProfileDataPublic>();
+            List<ProfileData> profileDataPublics = new List<ProfileData>();
             foreach (var profileEntity in profileEntities)
             {
-                ProfileDataPublic profileDataPublic = (ProfileDataPublic)profileEntity;
+                ProfileData profileDataPublic = (ProfileData)profileEntity;
                 //profileDataPublic.Photo = GetProfilePhoto(profileEntity.RowKey);
                 profileDataPublics.Add(profileDataPublic);
             }
