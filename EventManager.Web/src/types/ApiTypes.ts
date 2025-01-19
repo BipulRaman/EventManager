@@ -10,6 +10,8 @@ export enum Roles {
 	User = 'User',
 	InvitedUser = 'InvitedUser',
 	Creator = 'Creator',
+	Expense = 'Expense',
+	CheckIn = 'CheckIn',
 }
 
 export enum ProfileType {

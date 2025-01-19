@@ -77,7 +77,7 @@ public class ExpenseController : Controller
         return StatusCode((int)opResult.Status, opResult);
     }
 
-    [Authorize(Roles = nameof(Role.Admin))]
+    [Authorize(Roles = nameof(Role.Admin))]  
     [HttpDelete("{ExpenseId}")]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.Unauthorized)]
