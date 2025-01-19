@@ -62,7 +62,7 @@ public class ProfileController : Controller
         return StatusCode((int)opResult.Status, opResult);
     }
 
-    [Authorize(Roles = nameof(Role.User))]
+    [Authorize(Roles = nameof(Role.CheckIn))]
     [HttpGet("phone/{phoneNumber}")]
     [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.Unauthorized)]
@@ -133,7 +133,7 @@ public class ProfileController : Controller
         return StatusCode((int)opResult.Status, opResult);
     }
 
-    [Authorize(Roles = $"{nameof(Role.User)}")]
+    [Authorize(Roles = $"{nameof(Role.CheckIn)}")]
     [HttpPost("checkin/venue/{userId}")]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.BadRequest)]
@@ -147,7 +147,7 @@ public class ProfileController : Controller
         return StatusCode((int)opResult.Status, opResult);
     }
 
-    [Authorize(Roles = $"{nameof(Role.User)}")]
+    [Authorize(Roles = $"{nameof(Role.CheckIn)}")]
     [HttpPost("checkin/gift/{userId}")]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.BadRequest)]
@@ -161,7 +161,7 @@ public class ProfileController : Controller
         return StatusCode((int)opResult.Status, opResult);
     }
     
-    [Authorize(Roles = $"{nameof(Role.User)}")]
+    [Authorize(Roles = $"{nameof(Role.CheckIn)}")]
     [HttpPost("checkin/meal/{userId}")]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.BadRequest)]

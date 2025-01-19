@@ -29,4 +29,15 @@ public enum Role
     /// Represents a creator role.
     /// </summary>
     Creator,
+
+    /// <summary>
+    /// Represents an expense role.
+    /// </summary>
+
+    Expense,
+
+    /// <summary>
+    /// Represents a check-in role.
+    /// </summary>
+    CheckIn,
 }
