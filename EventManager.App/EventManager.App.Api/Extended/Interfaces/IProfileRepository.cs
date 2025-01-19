@@ -29,6 +29,13 @@ public interface IProfileRepository
     List<ProfileEntity> GetUsersInGeoRange(double minLat, double maxLat, double minLon, double maxLon);
 
     /// <summary>
+    /// Get users by phone number. It fetch multiple user as multiple user can have same phone number due to lack of verification of phone number.
+    /// </summary>
+    /// <param name="phone"></param>
+    /// <returns></returns>
+    List<ProfileEntity> GetUsersByPhone(string phone);
+
+    /// <summary>
     /// Add User to the database.
     /// </summary>
     /// <param name="userInfo"></param>
@@ -52,4 +59,25 @@ public interface IProfileRepository
     /// <param name="email"></param>
     /// <returns></returns>
     bool CheckUserExists(string email);
+
+    /// <summary>
+    /// Checkin user to the venue.
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    bool VenueCheckIn(string userId);
+
+    /// <summary>
+    /// Checkin user to the gift.
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    bool GiftCheckIn(string userId);
+
+    /// <summary>
+    /// Checkin user to the meal.
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    bool MealCheckIn(string userId);
 }

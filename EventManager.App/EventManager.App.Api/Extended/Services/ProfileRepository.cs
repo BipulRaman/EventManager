@@ -22,7 +22,7 @@ public class ProfileRepository : IProfileRepository
     /// <inheritdoc/>
     public ProfileEntity GetUserDetailsByEmail(string email)
     {
-        var response = tableClient.Query<ProfileEntity>(e => e.PartitionKey.Equals(PartitionKey) && e.Email.Equals(email, StringComparison.Ordinal)).SingleOrDefault();
+        var response = tableClient.Query<ProfileEntity>(e => e.PartitionKey.Equals(PartitionKey) && e.Email.Equals(email, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
         return response;
     }
 
@@ -36,6 +36,12 @@ public class ProfileRepository : IProfileRepository
     public List<ProfileEntity> GetUsersInGeoRange(double minLat, double maxLat, double minLon, double maxLon)
     {
         var response = tableClient.Query<ProfileEntity>(e => e.PartitionKey.Equals(PartitionKey) && e.Latitude >= minLat && e.Latitude <= maxLat && e.Longitude >= minLon && e.Longitude <= maxLon).ToList();
+        return response;
+    }
+
+    public List<ProfileEntity> GetUsersByPhone(string phone)
+    {
+        var response = tableClient.Query<ProfileEntity>(e => e.PartitionKey.Equals(PartitionKey) && e.Phone.Equals(phone, StringComparison.OrdinalIgnoreCase)).ToList();
         return response;
     }
 
@@ -80,6 +86,39 @@ public class ProfileRepository : IProfileRepository
         if (response != null)
         {
             return true;
+        }
+        return false;
+    }
+
+    public bool VenueCheckIn(string userId)
+    {
+        ProfileEntity profileEntity = GetUserDetailsById(userId);
+        if (profileEntity != null)
+        {
+            profileEntity.VenueCheckInDateTime = DateTimeOffset.UtcNow;
+            return UpdateUserDetails(profileEntity);
+        }
+        return false;
+    }
+
+    public bool GiftCheckIn(string userId)
+    {
+        ProfileEntity profileEntity = GetUserDetailsById(userId);
+        if (profileEntity != null)
+        {
+            profileEntity.GiftCheckInDateTime = DateTimeOffset.UtcNow;
+            return UpdateUserDetails(profileEntity);
+        }
+        return false;
+    }
+
+    public bool MealCheckIn(string userId)
+    {
+        ProfileEntity profileEntity = GetUserDetailsById(userId);
+        if (profileEntity != null)
+        {
+            profileEntity.MealCheckInDateTime = DateTimeOffset.UtcNow;
+            return UpdateUserDetails(profileEntity);
         }
         return false;
     }

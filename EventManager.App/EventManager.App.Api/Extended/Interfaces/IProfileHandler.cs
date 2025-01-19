@@ -58,4 +58,32 @@ public interface IProfileHandler
     /// <param name="radiusInKm"></param>
     /// <returns></returns>
     OpResult<List<ProfileDataPublic>> GetPeopleNearby(HttpContext httpContext, int radiusInKm);
+
+    /// <summary>
+    /// Get people by phone number.
+    /// </summary>
+    /// <param name="phone"></param>
+    /// <returns></returns>
+    OpResult<List<ProfileDataPublic>> GetPeopleByPhone(string phone);
+
+    /// <summary>
+    /// Check in to the venue.
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    OpResult<bool> VenueCheckIn(string userId);
+
+    /// <summary>
+    /// Check in to the gift.
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    OpResult<bool> GiftCheckIn(string userId);
+
+    /// <summary>
+    /// Check in to the meal.
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    OpResult<bool> MealCheckIn(string userId);
 }

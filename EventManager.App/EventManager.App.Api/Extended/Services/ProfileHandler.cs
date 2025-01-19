@@ -302,6 +302,40 @@ public class ProfileHandler : IProfileHandler
         return opResult;
     }
 
+    public OpResult<List<ProfileDataPublic>> GetPeopleByPhone(string phone)
+    {
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(GetPeopleByPhone)} => Method started.");
+        OpResult<List<ProfileDataPublic>> opResult = new OpResult<List<ProfileDataPublic>>()
+        {
+            Status = HttpStatusCode.InternalServerError,
+            ErrorCode = ErrorCode.Common_InternalServerError,
+        };
+
+        try
+        {
+            List<ProfileEntity> profileEntities = profileRepository.GetUsersByPhone(phone);
+            List<ProfileDataPublic> profileDataPublics = new List<ProfileDataPublic>();
+            foreach (var profileEntity in profileEntities)
+            {
+                ProfileDataPublic profileDataPublic = (ProfileDataPublic)profileEntity;
+                //profileDataPublic.Photo = GetProfilePhoto(profileEntity.RowKey);
+                profileDataPublics.Add(profileDataPublic);
+            }
+
+            opResult.ErrorCode = ErrorCode.None;
+            opResult.Status = HttpStatusCode.OK;
+            opResult.Result = profileDataPublics;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(GetPeopleByPhone)} => Error occurred while getting the people by phone.");
+        }
+
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(GetPeopleByPhone)} => Method ended.");
+
+        return opResult;
+    }
+
     public OpResult<ProfileData> UpdateGeoCoordinates(HttpContext httpContext, double latitude, double longitude)
     {
         logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(UpdateGeoCoordinates)} => Method started.");
@@ -351,6 +385,120 @@ public class ProfileHandler : IProfileHandler
         }
 
         logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(UpdateGeoCoordinates)} => Method ended.");
+        return opResult;
+    }
+
+    public OpResult<bool> VenueCheckIn(string userId)
+    {
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Method started.");
+        OpResult<bool> opResult = new OpResult<bool>()
+        {
+            Result = false,
+            Status = HttpStatusCode.InternalServerError,
+            ErrorCode = ErrorCode.Common_InternalServerError,
+        };
+
+        try
+        {
+            bool response = profileRepository.VenueCheckIn(userId);
+            if (response)
+            {
+                opResult.ErrorCode = ErrorCode.None;
+                opResult.Status = HttpStatusCode.OK;
+                opResult.Result = true;
+            }
+            else
+            {
+                logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Failed to update venue check-in.");
+                opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                opResult.Status = HttpStatusCode.InternalServerError;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Error updating venue check-in.");
+            opResult.ErrorCode = ErrorCode.Common_InternalServerError;
+            opResult.Status = HttpStatusCode.InternalServerError;
+        }
+
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Method ended.");
+
+        return opResult;
+    }
+
+    public OpResult<bool> GiftCheckIn(string userId)
+    {
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Method started.");
+        OpResult<bool> opResult = new OpResult<bool>()
+        {
+            Result = false,
+            Status = HttpStatusCode.InternalServerError,
+            ErrorCode = ErrorCode.Common_InternalServerError,
+        };
+
+        try
+        {
+            bool response = profileRepository.GiftCheckIn(userId);
+            if (response)
+            {
+                opResult.ErrorCode = ErrorCode.None;
+                opResult.Status = HttpStatusCode.OK;
+                opResult.Result = true;
+            }
+            else
+            {
+                logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Failed to update gift check-in.");
+                opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                opResult.Status = HttpStatusCode.InternalServerError;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Error updating gift check-in.");
+            opResult.ErrorCode = ErrorCode.Common_InternalServerError;
+            opResult.Status = HttpStatusCode.InternalServerError;
+        }
+
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Method ended.");
+
+        return opResult;
+    }
+
+    public OpResult<bool> MealCheckIn(string userId)
+    {
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Method started.");
+        OpResult<bool> opResult = new OpResult<bool>()
+        {
+            Result = false,
+            Status = HttpStatusCode.InternalServerError,
+            ErrorCode = ErrorCode.Common_InternalServerError,
+        };
+
+        try
+        {
+            bool response = profileRepository.MealCheckIn(userId);
+            if (response)
+            {
+                opResult.ErrorCode = ErrorCode.None;
+                opResult.Status = HttpStatusCode.OK;
+                opResult.Result = true;
+            }
+            else
+            {
+                logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Failed to update meal check-in.");
+                opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                opResult.Status = HttpStatusCode.InternalServerError;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Error updating meal check-in.");
+            opResult.ErrorCode = ErrorCode.Common_InternalServerError;
+            opResult.Status = HttpStatusCode.InternalServerError;
+        }
+
+        logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Method ended.");
+
         return opResult;
     }
 

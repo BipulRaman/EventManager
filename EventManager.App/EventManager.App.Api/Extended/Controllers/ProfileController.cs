@@ -62,6 +62,19 @@ public class ProfileController : Controller
         return StatusCode((int)opResult.Status, opResult);
     }
 
+    [Authorize(Roles = nameof(Role.User))]
+    [HttpGet("phone/{phoneNumber}")]
+    [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(OpResult<List<ProfileDataPublic>>), (int)HttpStatusCode.InternalServerError)]
+    public IActionResult GetUsersByPhone(string phoneNumber)
+    {
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(GetUserProfile)} => Started by User: {ContextHelper.GetLoggedInUser(HttpContext)?.Id}.");
+        OpResult<List<ProfileDataPublic>> opResult = profileHandler.GetPeopleByPhone(phoneNumber);
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(GetUserProfile)} => Completed. Response => Status: {opResult.Status}; ErrorCode: {opResult.ErrorCode}.");
+        return StatusCode((int)HttpStatusCode.OK, opResult);
+    }
+
     [AllowAnonymous]
     [HttpPost]
     [ProducesResponseType(typeof(OpResult<ProfileData>), (int)HttpStatusCode.Created)]
@@ -117,6 +130,48 @@ public class ProfileController : Controller
         logger.LogInformation($"{nameof(ProfileController)}.{nameof(UpdateUserProfileImage)} => Started by User:  {ContextHelper.GetLoggedInUser(HttpContext)?.Id} .");
         OpResult<bool> opResult = profileHandler.UpdateProfilePhoto(HttpContext, file);
         logger.LogInformation($"{nameof(ProfileController)}.{nameof(UpdateUserProfileImage)} => Completed. Response => Status: {opResult.Status}; ErrorCode: {opResult.ErrorCode}.");
+        return StatusCode((int)opResult.Status, opResult);
+    }
+
+    [Authorize(Roles = $"{nameof(Role.User)}")]
+    [HttpPost("checkin/venue/{userId}")]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.InternalServerError)]
+    public IActionResult VenueCheckIn(string userId)
+    {
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(VenueCheckIn)} => Started by User: {ContextHelper.GetLoggedInUser(HttpContext)?.Id}.");
+        OpResult<bool> opResult = profileHandler.VenueCheckIn(userId);
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(VenueCheckIn)} => Completed. Response => Status: {opResult.Status}; ErrorCode: {opResult.ErrorCode}.");
+        return StatusCode((int)opResult.Status, opResult);
+    }
+
+    [Authorize(Roles = $"{nameof(Role.User)}")]
+    [HttpPost("checkin/gift/{userId}")]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.InternalServerError)]
+    public IActionResult GiftCheckIn(string userId)
+    {
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(GiftCheckIn)} => Started by User: {ContextHelper.GetLoggedInUser(HttpContext)?.Id}.");
+        OpResult<bool> opResult = profileHandler.GiftCheckIn(userId);
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(GiftCheckIn)} => Completed. Response => Status: {opResult.Status}; ErrorCode: {opResult.ErrorCode}.");
+        return StatusCode((int)opResult.Status, opResult);
+    }
+    
+    [Authorize(Roles = $"{nameof(Role.User)}")]
+    [HttpPost("checkin/meal/{userId}")]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(OpResult<bool>), (int)HttpStatusCode.InternalServerError)]
+    public IActionResult MealCheckIn(string userId)
+    {
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(GiftCheckIn)} => Started by User: {ContextHelper.GetLoggedInUser(HttpContext)?.Id}.");
+        OpResult<bool> opResult = profileHandler.MealCheckIn(userId);
+        logger.LogInformation($"{nameof(ProfileController)}.{nameof(GiftCheckIn)} => Completed. Response => Status: {opResult.Status}; ErrorCode: {opResult.ErrorCode}.");
         return StatusCode((int)opResult.Status, opResult);
     }
 }
