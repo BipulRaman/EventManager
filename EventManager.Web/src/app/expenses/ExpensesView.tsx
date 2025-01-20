@@ -35,8 +35,14 @@ export const ExpensesView: React.FunctionComponent = () => {
                 <Table sx={{ minWidth: 300 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell><b>Particular</b></TableCell>
-                            <TableCell align="right"><b>Amount</b></TableCell>
+                            <TableCell>
+                                <div><b>Particular</b></div>
+                                <div style={subdetailsStyle}>{expenseStateList.data.length} transactions</div>
+                            </TableCell>
+                            <TableCell align="right">
+                                <div><b>Amount</b></div>
+                                <div style={subdetailsStyle}>Total: {expenseStateList.data.reduce((total, row) => total + row.amount, 0)}</div>
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -48,8 +54,8 @@ export const ExpensesView: React.FunctionComponent = () => {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">
-                                        <div>{row.title}</div>
-                                        <div style={subdetailsStyle}>{ISODateTimeToReadable(row.dateTime)} | {row.createdByName}</div>
+                                            <div>{row.title}</div>
+                                            <div style={subdetailsStyle}>{ISODateTimeToReadable(row.dateTime)} | {row.createdByName}</div>
                                         </TableCell>
                                         <TableCell align="right">{row.amount}</TableCell>
                                     </TableRow>
