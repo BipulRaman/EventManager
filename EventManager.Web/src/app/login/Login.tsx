@@ -11,7 +11,6 @@ import { SetAccessTokenData } from '../../utils/TokenHelper';
 import { AuthContext, AuthData } from '../../utils/AuthContextHelper';
 import { AuthTokenResult, CreateOtpPayload, CreateTokenPayload } from '../../types/AuthApiTypes';
 import { Pathname } from '../../constants/Routes';
-import Link from 'next/link';
 import { AuthServices } from '@/services/ServicesIndex';
 import Image from 'next/image';
 
