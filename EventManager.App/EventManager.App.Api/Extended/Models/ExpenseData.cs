@@ -10,7 +10,7 @@ public class ExpenseData : BaseData
     public string Title { get; set; }
 
     [JsonPropertyName("amount")]
-    public float Amount { get; set; }
+    public double Amount { get; set; }
 
     [JsonPropertyName("dateTime")]
     public DateTimeOffset DateTime { get; set; }

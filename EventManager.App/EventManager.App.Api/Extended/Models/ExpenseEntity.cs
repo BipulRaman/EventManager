@@ -6,7 +6,7 @@ public class ExpenseEntity : BaseEntity
 {
     public string Title { get; set; }
 
-    public float Amount { get; set; }
+    public double Amount { get; set; }
     public DateTimeOffset DateTime { get; set; }
 
     public static implicit operator ExpenseData(ExpenseEntity entity)
