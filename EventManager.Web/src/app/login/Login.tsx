@@ -202,9 +202,9 @@ export const Login: React.FC<LoginProps> = (props) => {
                 Login
               </Button>
             </Stack>
-            <Typography variant="body2" color="textSecondary">
+            {/* <Typography variant="body2" color="textSecondary">
               First time here? <Link href={Pathname.Register}>Register now</Link>
-            </Typography>
+            </Typography> */}
           </Stack>
         </form>
       </PageCard>

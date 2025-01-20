@@ -21,7 +21,7 @@ export const ExpenseAdd: React.FunctionComponent = () => {
     const [formData, setFormData] = React.useState<CreateExpensePayload>({
         title: '',
         amount: 0,
-        dateTime: new Date().toISOString().split('T')[0],
+        dateTime: new Date().toISOString(),
     } as CreateExpensePayload);
 
     const isValid_Title = (title: string) => {
@@ -77,7 +77,7 @@ export const ExpenseAdd: React.FunctionComponent = () => {
                                 shrink: true,
                             },
                         }}
-                        value={formData.dateTime}
+                        value={formData.dateTime.split('T')[0]}
                         onChange={(e) => setFormData({ ...formData, dateTime: e.target.value })}
                     />
                     <Button style={submitButtonStyle} disabled={!isFormValid} variant="contained" type="submit">Submit</Button>
