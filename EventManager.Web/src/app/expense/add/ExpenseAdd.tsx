@@ -65,7 +65,7 @@ export const ExpenseAdd: React.FunctionComponent = () => {
                         error={isTouched && !isValid_Title(formData.title)}
                     />
                     <TextField
-                        label="Amount"
+                        label="Amount in ₹"
                         onChange={(e) => { setFormData({ ...formData, amount: parseFloat(e.target.value) }); setIsTouched(true); }}
                         error={isTouched && !isValid_Amount(formData.amount)}
                     />
