@@ -1,17 +1,17 @@
 "use client";
 import { NextPage } from 'next';
 import { PageWrapperAuth } from '@/components/PageWrapperAuth';
-import { ExpensesTabs } from '@/constants/Routes';
+import { ExpenseTabs } from '@/constants/Routes';
 import { PageTabs } from '@/components/PageTabs';
-import { ExpensesView } from './ExpensesView';
+import { ExpenseAdd } from './ExpenseAdd';
 
-const ExpensePage: NextPage = () => {
+const ExpenseAddPage: NextPage = () => {
     return (
         <PageWrapperAuth>
-            <PageTabs tabs={ExpensesTabs} />
-            <ExpensesView />
+            <PageTabs tabs={ExpenseTabs} />
+            <ExpenseAdd />
         </PageWrapperAuth>
     );
 };
 
-export default ExpensePage;
+export default ExpenseAddPage;

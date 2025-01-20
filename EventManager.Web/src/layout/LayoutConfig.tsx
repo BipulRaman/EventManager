@@ -27,7 +27,7 @@ export const PublicPages: IPages[] = [
   },
   {
     title: "Expenses",
-    href: Pathname.Expenses,
+    href: Pathname.Expense,
     icon: <CurrencyRupeeIcon />,
   },
   {
@@ -55,7 +55,7 @@ export const BottomNavPages: IPages[] = [
   },
   {
     title: "Expenses",
-    href: Pathname.Expenses,
+    href: Pathname.Expense,
     icon: <CurrencyRupeeIcon />,
   },
   {

@@ -12,8 +12,8 @@ export enum Pathname {
     Business = '/business',
     Business_Add = '/business/add',
     Business_Edit = '/business/edit',
-    Expenses = '/expenses',
-    Expenses_Add = '/expenses/add',
+    Expense = '/expense',
+    Expense_Add = '/expense/add',
     CheckIn = '/checkin',
     Notifications = '/notifications',
     Events = '/events',
@@ -70,9 +70,9 @@ export const NewsfeedTabs = [
     { label: 'Create', path: Pathname.Newsfeed_Create },
 ];
 
-export const ExpensesTabs = [
-    { label: 'Expenses', path: Pathname.Expenses },
-    { label: 'Add', path: Pathname.Expenses_Add },
+export const ExpenseTabs = [
+    { label: 'Expense', path: Pathname.Expense },
+    { label: 'Add', path: Pathname.Expense_Add },
 ];
 
 export const CheckInTabs = [
@@ -92,6 +92,7 @@ export const RoutesMetadata = [
     { title: 'Business Edit | Navodaya Alumni App', route: Pathname.Business_Edit, description: 'The business edit of Navodaya Alumni App.' },
     { title: 'Notifications | Navodaya Alumni App', route: Pathname.Notifications, description: 'The notifications of Navodaya Alumni App.' },
     { title: 'Events | Navodaya Alumni App', route: Pathname.Events, description: 'The events of Navodaya Alumni App.' },
+    { title: 'Expense | Navodaya Alumni App', route: Pathname.Expense, description: 'The expense of Navodaya Alumni App.' },
     { title: 'Mentorship | Navodaya Alumni App', route: Pathname.Mentorship, description: 'The mentorship of Navodaya Alumni App.' },
     { title: 'Poll | Navodaya Alumni App', route: Pathname.Poll, description: 'The poll of Navodaya Alumni App.' },
     { title: 'Identity | Navodaya Alumni App', route: Pathname.Identity, description: 'The identity of Navodaya Alumni App.' },

@@ -13,7 +13,7 @@ const subdetailsStyle: React.CSSProperties = {
     color: 'gray',
 };
 
-export const ExpensesView: React.FunctionComponent = () => {
+export const ExpenseView: React.FunctionComponent = () => {
     const { expenseStateList, setExpenseStateList } = useGlobalState();
 
     React.useEffect(() => {
@@ -37,11 +37,11 @@ export const ExpensesView: React.FunctionComponent = () => {
                         <TableRow>
                             <TableCell>
                                 <div><b>Particular</b></div>
-                                <div style={subdetailsStyle}>{expenseStateList.data.length} transactions</div>
+                                <div style={subdetailsStyle}>{Array.isArray(expenseStateList.data) ? expenseStateList.data.length : 0} transactions</div>
                             </TableCell>
                             <TableCell align="right">
                                 <div><b>Amount</b></div>
-                                <div style={subdetailsStyle}>Total: {expenseStateList.data.reduce((total, row) => total + row.amount, 0)}</div>
+                                <div style={subdetailsStyle}>Total: {Array.isArray(expenseStateList.data) ? expenseStateList.data.reduce((total, row) => total + row.amount, 0) : 0}</div>
                             </TableCell>
                         </TableRow>
                     </TableHead>
