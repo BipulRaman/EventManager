@@ -311,7 +311,7 @@ public class ProfileHandler : IProfileHandler
             ErrorCode = ErrorCode.Common_InternalServerError,
         };
 
-        if (string.IsNullOrWhiteSpace(phone))
+        if (!string.IsNullOrWhiteSpace(phone))
         {
             try
             {
@@ -407,7 +407,7 @@ public class ProfileHandler : IProfileHandler
             ErrorCode = ErrorCode.Common_InternalServerError,
         };
 
-        if (string.IsNullOrWhiteSpace(userId))
+        if (!string.IsNullOrWhiteSpace(userId))
         {
             try
             {
@@ -454,7 +454,7 @@ public class ProfileHandler : IProfileHandler
             ErrorCode = ErrorCode.Common_InternalServerError,
         };
 
-        if (string.IsNullOrWhiteSpace(userId))
+        if (!string.IsNullOrWhiteSpace(userId))
         {
             try
             {
@@ -503,7 +503,7 @@ public class ProfileHandler : IProfileHandler
 
         try
         {
-            if (string.IsNullOrWhiteSpace(userId))
+            if (!string.IsNullOrWhiteSpace(userId))
             {
                 bool response = profileRepository.MealCheckIn(userId);
                 if (response)

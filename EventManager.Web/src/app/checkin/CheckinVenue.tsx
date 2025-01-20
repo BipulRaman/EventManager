@@ -53,7 +53,7 @@ export const CheckinVenue: React.FC = () => {
          />    
       </PageCard>
       {
-        profileList.status === CallStatus.Success && profileList.data.length > 0 && (
+        profileList.status === CallStatus.Success && profileList.data && profileList.data.length > 0 && (
           profileList.data.map((profile, index) => (
             <PersonDisplay key={index} {...profile} />
           ))
