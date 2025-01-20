@@ -100,7 +100,7 @@ public class ProfileData : BaseData
     public DateTimeOffset? MealCheckInDateTime { get; set; }
 
     /// <summary>
-    /// Vaidate the UserInfo object.
+    /// Validate the UserInfo object.
     /// </summary>
     /// <returns></returns>
     public bool IsValidToUpdate()

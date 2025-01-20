@@ -311,24 +311,33 @@ public class ProfileHandler : IProfileHandler
             ErrorCode = ErrorCode.Common_InternalServerError,
         };
 
-        try
+        if (string.IsNullOrWhiteSpace(phone))
         {
-            List<ProfileEntity> profileEntities = profileRepository.GetUsersByPhone(phone);
-            List<ProfileData> profileDataPublics = new List<ProfileData>();
-            foreach (var profileEntity in profileEntities)
+            try
             {
-                ProfileData profileDataPublic = (ProfileData)profileEntity;
-                //profileDataPublic.Photo = GetProfilePhoto(profileEntity.RowKey);
-                profileDataPublics.Add(profileDataPublic);
-            }
+                List<ProfileEntity> profileEntities = profileRepository.GetUsersByPhone(phone);
+                List<ProfileData> profileDataPublics = new List<ProfileData>();
+                foreach (var profileEntity in profileEntities)
+                {
+                    ProfileData profileDataPublic = (ProfileData)profileEntity;
+                    //profileDataPublic.Photo = GetProfilePhoto(profileEntity.RowKey);
+                    profileDataPublics.Add(profileDataPublic);
+                }
 
-            opResult.ErrorCode = ErrorCode.None;
-            opResult.Status = HttpStatusCode.OK;
-            opResult.Result = profileDataPublics;
+                opResult.ErrorCode = ErrorCode.None;
+                opResult.Status = HttpStatusCode.OK;
+                opResult.Result = profileDataPublics;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(GetPeopleByPhone)} => Error occurred while getting the people by phone.");
+            }
         }
-        catch (Exception ex)
+        else
         {
-            logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(GetPeopleByPhone)} => Error occurred while getting the people by phone.");
+            logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Invalid useId.");
+            opResult.ErrorCode = ErrorCode.Common_BadRequest;
+            opResult.Status = HttpStatusCode.BadRequest;
         }
 
         logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(GetPeopleByPhone)} => Method ended.");
@@ -398,28 +407,37 @@ public class ProfileHandler : IProfileHandler
             ErrorCode = ErrorCode.Common_InternalServerError,
         };
 
-        try
+        if (string.IsNullOrWhiteSpace(userId))
         {
-            bool response = profileRepository.VenueCheckIn(userId);
-            if (response)
+            try
             {
-                opResult.ErrorCode = ErrorCode.None;
-                opResult.Status = HttpStatusCode.OK;
-                opResult.Result = true;
+                bool response = profileRepository.VenueCheckIn(userId);
+                if (response)
+                {
+                    opResult.ErrorCode = ErrorCode.None;
+                    opResult.Status = HttpStatusCode.OK;
+                    opResult.Result = true;
+                }
+                else
+                {
+                    logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Failed to update venue check-in.");
+                    opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                    opResult.Status = HttpStatusCode.InternalServerError;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Failed to update venue check-in.");
-                opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Error updating venue check-in.");
+                opResult.ErrorCode = ErrorCode.Common_InternalServerError;
                 opResult.Status = HttpStatusCode.InternalServerError;
             }
         }
-        catch (Exception ex)
+        else
         {
-            logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Error updating venue check-in.");
-            opResult.ErrorCode = ErrorCode.Common_InternalServerError;
-            opResult.Status = HttpStatusCode.InternalServerError;
-        }
+            logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Invalid useId.");
+            opResult.ErrorCode = ErrorCode.Common_BadRequest;
+            opResult.Status = HttpStatusCode.BadRequest;
+        }               
 
         logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(VenueCheckIn)} => Method ended.");
 
@@ -436,28 +454,37 @@ public class ProfileHandler : IProfileHandler
             ErrorCode = ErrorCode.Common_InternalServerError,
         };
 
-        try
+        if (string.IsNullOrWhiteSpace(userId))
         {
-            bool response = profileRepository.GiftCheckIn(userId);
-            if (response)
+            try
             {
-                opResult.ErrorCode = ErrorCode.None;
-                opResult.Status = HttpStatusCode.OK;
-                opResult.Result = true;
+                bool response = profileRepository.GiftCheckIn(userId);
+                if (response)
+                {
+                    opResult.ErrorCode = ErrorCode.None;
+                    opResult.Status = HttpStatusCode.OK;
+                    opResult.Result = true;
+                }
+                else
+                {
+                    logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Failed to update gift check-in.");
+                    opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                    opResult.Status = HttpStatusCode.InternalServerError;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Failed to update gift check-in.");
-                opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Error updating gift check-in.");
+                opResult.ErrorCode = ErrorCode.Common_InternalServerError;
                 opResult.Status = HttpStatusCode.InternalServerError;
             }
         }
-        catch (Exception ex)
+        else
         {
-            logger.LogError(ex, $"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Error updating gift check-in.");
-            opResult.ErrorCode = ErrorCode.Common_InternalServerError;
-            opResult.Status = HttpStatusCode.InternalServerError;
-        }
+            logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Invalid useId.");
+            opResult.ErrorCode = ErrorCode.Common_BadRequest;
+            opResult.Status = HttpStatusCode.BadRequest;
+        }        
 
         logger.LogInformation($"{nameof(ProfileHandler)}.{nameof(GiftCheckIn)} => Method ended.");
 
@@ -476,18 +503,27 @@ public class ProfileHandler : IProfileHandler
 
         try
         {
-            bool response = profileRepository.MealCheckIn(userId);
-            if (response)
+            if (string.IsNullOrWhiteSpace(userId))
             {
-                opResult.ErrorCode = ErrorCode.None;
-                opResult.Status = HttpStatusCode.OK;
-                opResult.Result = true;
+                bool response = profileRepository.MealCheckIn(userId);
+                if (response)
+                {
+                    opResult.ErrorCode = ErrorCode.None;
+                    opResult.Status = HttpStatusCode.OK;
+                    opResult.Result = true;
+                }
+                else
+                {
+                    logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Failed to update meal check-in.");
+                    opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
+                    opResult.Status = HttpStatusCode.InternalServerError;
+                }
             }
             else
             {
-                logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Failed to update meal check-in.");
-                opResult.ErrorCode = ErrorCode.Entity_Update_Failed;
-                opResult.Status = HttpStatusCode.InternalServerError;
+                logger.LogWarning($"{nameof(ProfileHandler)}.{nameof(MealCheckIn)} => Invalid useId.");
+                opResult.ErrorCode = ErrorCode.Common_BadRequest;
+                opResult.Status = HttpStatusCode.BadRequest;
             }
         }
         catch (Exception ex)
