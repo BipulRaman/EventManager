@@ -1,11 +1,12 @@
 import { CreateOtpPayload, CreateTokenPayload } from "@/types/AuthApiTypes";
-import { AuthEndPoints, BusinessEndPoints, NotificationEndPoints, PostEndPoints, ProfileEndPoints, UserEndPoints } from "../constants/ApiConstants";
+import { AuthEndPoints, BusinessEndPoints, ExpenseEndPoints, NotificationEndPoints, PostEndPoints, ProfileEndPoints, UserEndPoints } from "../constants/ApiConstants";
 import { CreateBusinessPayload } from "../types/BusinessApiTypes";
 import AxiosAuthInstance from "../utils/AxiosAuthConfig";
 import { CreateProfilePayload, UpdateProfilePayload } from "@/types/ProfileApiTypes";
 import { CreateNotificationPayload } from "@/types/NotificationApiTypes";
 import { CreatePostPayload } from "@/types/PostApiTypes";
 import { UserCreatePayload, UserUpdatePayload } from "@/types/UserApiTypes";
+import { CreateExpensePayload, UpdateExpensePayload } from "@/types/ExpenseApiTypes";
 
 enum HttpMethod {
     GET = 'get',
@@ -37,7 +38,7 @@ const createApiCall = async <T = unknown>(method: HttpMethod, endpoint: string, 
     }
 };
 
-export const BusinessApi = {
+export const BusinessServices = {
     GetMyBusinessList: async () => createApiCall(HttpMethod.GET, BusinessEndPoints.GetBusinesses()),
     GetBusinessListByPinCode: async (pincode: number) => createApiCall(HttpMethod.GET, BusinessEndPoints.GetBusinessesByPincode(pincode)),
     GetBusinessListByPinCodeCategory: async (pincode: number, category: string) => createApiCall(HttpMethod.GET, BusinessEndPoints.GetBusinessByPinCodeCategory(pincode, category)),
@@ -89,4 +90,12 @@ export const PostServices = {
     CreatePost: async (payload: CreatePostPayload) => createApiCall(HttpMethod.POST, PostEndPoints.PostPost(), payload),
     UpdatePost: async (payload: CreatePostPayload) => createApiCall(HttpMethod.PATCH, PostEndPoints.PatchPost(), payload),
     DeletePost: async (id: string) => createApiCall(HttpMethod.DELETE, PostEndPoints.DeletePost(id)),
+}
+
+export const ExpenseServices = {
+    GetExpenses: async () => createApiCall(HttpMethod.GET, ExpenseEndPoints.GetExpenses()),
+    GetExpenseById: async (id: string) => createApiCall(HttpMethod.GET, ExpenseEndPoints.GetExpenseById(id)),
+    CreateExpense: async (payload: CreateExpensePayload) => createApiCall(HttpMethod.POST, ExpenseEndPoints.PostExpense(), payload),
+    UpdateExpense: async (payload: UpdateExpensePayload) => createApiCall(HttpMethod.PATCH, ExpenseEndPoints.PatchExpense(), payload),
+    DeleteExpense: async (id: string) => createApiCall(HttpMethod.DELETE, ExpenseEndPoints.DeleteExpense(id)),
 }

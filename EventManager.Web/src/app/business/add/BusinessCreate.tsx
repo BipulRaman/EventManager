@@ -11,7 +11,7 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import { CallStatus } from '../../../types/ApiTypes'
 import { StateData } from '@/state/GlobalState';
 import { BusinessResult, CreateBusinessPayload } from '@/types/BusinessApiTypes';
-import { BusinessApi } from '@/services/ServicesIndex';
+import { BusinessServices } from '@/services/ServicesIndex';
 import {BusinessCategories} from '@/constants/StaticLists';
 import useGlobalState from '@/state/GlobalState';
 import { ApiComponentStateManager, ApiGlobalStateManager } from '@/utils/ServiceStateHelper';
@@ -71,8 +71,8 @@ export const BusinessCreate: React.FunctionComponent = () => {
         setIsFormTouched(true);
         if (validateForm()) {
             setIsSubmitted(true);
-            ApiComponentStateManager(BusinessApi.CreateBusiness(formData), setBusinessCreationResult).then(() => {
-                ApiGlobalStateManager(BusinessApi.GetMyBusinessList(), setBusinessStateList);
+            ApiComponentStateManager(BusinessServices.CreateBusiness(formData), setBusinessCreationResult).then(() => {
+                ApiGlobalStateManager(BusinessServices.GetMyBusinessList(), setBusinessStateList);
             });
         }
     }

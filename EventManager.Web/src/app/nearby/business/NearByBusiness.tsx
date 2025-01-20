@@ -4,7 +4,7 @@ import { Divider, IconButton, Stack, TextField as TextBox, Typography } from '@m
 import SearchIcon from '@mui/icons-material/Search';
 import { PageCard } from '@/components/PageCard';
 import useStore from '@/state/GlobalState';
-import { BusinessApi } from '@/services/ServicesIndex';
+import { BusinessServices } from '@/services/ServicesIndex';
 import { CallStatus } from '@/types/ApiTypes';
 import { NearByBusinessDisplay } from './NearByBusinessDisplay';
 import { ApiGlobalStateManager } from '@/utils/ServiceStateHelper';
@@ -28,7 +28,7 @@ export const NearByBusiness: React.FC = () => {
     if (!isPinCodeValid) {
       return;
     }
-    ApiGlobalStateManager(BusinessApi.GetBusinessListByPinCode(Number(pinCode)), setNearbyBusinessListState);
+    ApiGlobalStateManager(BusinessServices.GetBusinessListByPinCode(Number(pinCode)), setNearbyBusinessListState);
   };
 
   return (

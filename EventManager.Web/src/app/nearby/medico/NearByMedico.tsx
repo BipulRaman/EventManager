@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Divider, IconButton, Stack, TextField as TextBox, Typography } from '@mui/material';
 import { PageCard } from '@/components/PageCard';
 import useStore from '@/state/GlobalState';
-import { BusinessApi } from '@/services/ServicesIndex';
+import { BusinessServices } from '@/services/ServicesIndex';
 import { CallStatus } from '@/types/ApiTypes';
 import { NearByBusinessDisplay } from '../business/NearByBusinessDisplay';
 import SearchIcon from '@mui/icons-material/Search';
@@ -29,7 +29,7 @@ export const NearByMedico: React.FC = () => {
     if (!isPinCodeValid) {
       return;
     }
-    ApiGlobalStateManager(BusinessApi.GetBusinessListByPinCodeCategory(Number(pinCode), doctorsCategory), setNearbyDoctorsListState);
+    ApiGlobalStateManager(BusinessServices.GetBusinessListByPinCodeCategory(Number(pinCode), doctorsCategory), setNearbyDoctorsListState);
   };
 
   return (

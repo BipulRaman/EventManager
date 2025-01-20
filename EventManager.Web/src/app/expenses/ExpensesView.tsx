@@ -1,41 +1,64 @@
 "use client";
 import React from "react";
-import { Typography } from "@mui/material";
-import { PageCard } from "../../components/PageCard";
 import useGlobalState from "../../state/GlobalState";
 import { CallStatus } from "@/types/ApiTypes";
-import { BusinessApi } from "@/services/ServicesIndex";
+import { ExpenseServices } from "@/services/ServicesIndex";
 import { ApiGlobalStateManager } from "@/utils/ServiceStateHelper";
-import Link from "next/link";
-import { Pathname } from "@/constants/Routes";
+import { StatusMessage } from "@/components/StatusMessage";
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
+import { ISODateTimeToReadable } from "@/utils/CommonHelper";
+
+const subdetailsStyle: React.CSSProperties = {
+    fontSize: '0.7rem',
+    color: 'gray',
+};
 
 export const ExpensesView: React.FunctionComponent = () => {
-    const { businessStateList, setBusinessStateList } = useGlobalState();
+    const { expenseStateList, setExpenseStateList } = useGlobalState();
 
     React.useEffect(() => {
-        if (!(businessStateList?.data?.length > 0)) {
-            ApiGlobalStateManager(BusinessApi.GetMyBusinessList(), setBusinessStateList);
+        if (!(expenseStateList?.data?.length > 0)) {
+            ApiGlobalStateManager(ExpenseServices.GetExpenses(), setExpenseStateList);
         }
     }, [])
 
     return (
         <>
-            {businessStateList.status === CallStatus.Success ? (
-                businessStateList.data.length > 0 ? (
-                    businessStateList.data.map((business, index) => (
-                        // <BusinessDisplay key={index} {...business} />
-                        <span key={index}>Hello</span>
-                    ))
-                ) : (
-                    <PageCard><Typography variant="body1">You have not added your business yet. Add it now at <Link href={Pathname.Business_Add}>Add Business</Link> page.</Typography></PageCard>
-                )
-            ) : businessStateList.status === CallStatus.InProgress ? (
-                <PageCard><Typography variant="body1">Loading...</Typography></PageCard>
-            ) : businessStateList.status === CallStatus.Failure ? (
-                <PageCard><Typography variant="body1">Error loading businesses. Please try again later.</Typography></PageCard>
-            ) : (
-                <PageCard><Typography variant="body1">You have not added your business yet. Add it now at <Link href={Pathname.Business_Add}>Add Business</Link> page.</Typography></PageCard>
-            )}
+            <StatusMessage
+                display={false}
+                notStartedMessage="Loading.."
+                successMessage=""
+                failureMessage="Something went wrong."
+                currentStatus={expenseStateList.status}
+            />
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 300 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell><b>Particular</b></TableCell>
+                            <TableCell align="right"><b>Amount</b></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            expenseStateList.status === CallStatus.Success && expenseStateList.data && expenseStateList.data.length > 0 && (
+                                expenseStateList.data.map((row) => (
+                                    <TableRow
+                                        key={row.id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                        <div>{row.title}</div>
+                                        <div style={subdetailsStyle}>{ISODateTimeToReadable(row.dateTime)} | {row.createdByName}</div>
+                                        </TableCell>
+                                        <TableCell align="right">{row.amount}</TableCell>
+                                    </TableRow>
+                                ))
+                            )
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </>
     );
 };

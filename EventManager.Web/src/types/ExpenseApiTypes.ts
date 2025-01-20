@@ -1,10 +1,10 @@
-type BaseEventPayload = {
+type BaseExpensePayload = {
     title: string,
     amount: number,
     dateTime: string // This should be in ISO 8601 format to be compatible with DateTimeOffset in C#
 }
 
-export type EventResult = BaseEventPayload & {
+export type ExpenseResult = BaseExpensePayload & {
     id: string,
     createdAt: string,
     modifiedAt: string,
@@ -13,8 +13,8 @@ export type EventResult = BaseEventPayload & {
     modifiedBy: string
 }
 
-export type CreateEventPayload = BaseEventPayload;
+export type CreateExpensePayload = BaseExpensePayload;
 
-export type UpdateEventPayload = BaseEventPayload & {
+export type UpdateExpensePayload = BaseExpensePayload & {
     id: string
 }

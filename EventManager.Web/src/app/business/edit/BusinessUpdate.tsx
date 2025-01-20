@@ -11,7 +11,7 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import { ApiResponse, CallStatus } from '../../../types/ApiTypes'
 import { StateData } from '@/state/GlobalState';
 import { BusinessResult, UpdateBusinessPayload } from '@/types/BusinessApiTypes';
-import { BusinessApi } from '@/services/ServicesIndex';
+import { BusinessServices } from '@/services/ServicesIndex';
 import { BusinessCategories } from '@/constants/StaticLists';
 import { useRouter } from 'next/navigation';
 import { Pathname } from '@/constants/Routes';
@@ -40,7 +40,7 @@ export const BusinessUpdate: React.FunctionComponent = () => {
             setFormData(business);
         }
         else {
-            BusinessApi.GetBusinessById(budinessId)
+            BusinessServices.GetBusinessById(budinessId)
                 .then(response => {
                     const apiResult = response.data as ApiResponse<BusinessResult>;
                     setFormData(apiResult.result as UpdateBusinessPayload);
@@ -94,7 +94,7 @@ export const BusinessUpdate: React.FunctionComponent = () => {
         setIsFormTouched(true);
         if (validateForm()) {
             setIsSubmitted(true);
-            ApiGlobalStateManager(BusinessApi.UpdateBusiness(formData), setBusinessUpdateResult).then(() => {
+            ApiGlobalStateManager(BusinessServices.UpdateBusiness(formData), setBusinessUpdateResult).then(() => {
                 const updatedBusinessList = businessStateList.data.map(business =>
                     business.id === formData.id ? { ...business, ...formData } : business
                 );

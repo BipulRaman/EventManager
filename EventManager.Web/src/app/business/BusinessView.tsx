@@ -5,7 +5,7 @@ import { PageCard } from "../../components/PageCard";
 import { BusinessDisplay } from "./BusinessDisplay";
 import useGlobalState from "../../state/GlobalState";
 import { CallStatus } from "@/types/ApiTypes";
-import { BusinessApi } from "@/services/ServicesIndex";
+import { BusinessServices } from "@/services/ServicesIndex";
 import { ApiGlobalStateManager } from "@/utils/ServiceStateHelper";
 import Link from "next/link";
 import { Pathname } from "@/constants/Routes";
@@ -14,7 +14,7 @@ export const BusinessView: React.FunctionComponent = () => {
 
     React.useEffect(() => {
         if (!(businessStateList?.data?.length > 0)) {
-            ApiGlobalStateManager(BusinessApi.GetMyBusinessList(), setBusinessStateList);
+            ApiGlobalStateManager(BusinessServices.GetMyBusinessList(), setBusinessStateList);
         }
     }, [])
 

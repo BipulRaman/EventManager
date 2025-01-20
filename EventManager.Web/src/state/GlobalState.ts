@@ -3,6 +3,7 @@ import { PostResult } from "../types/PostApiTypes";
 import { ProfileResult, PublicProfileResult } from "../types/ProfileApiTypes";
 import { CallStatus } from "../types/ApiTypes";
 import { BusinessResult } from '@/types/BusinessApiTypes';
+import { ExpenseResult } from '@/types/ExpenseApiTypes';
 
 export type StateData<T> = {
     data: T;
@@ -29,6 +30,7 @@ type GlobalState = {
     nearbyDoctorsListState: StateData<BusinessResult[]>;    
     businessState: StateData<BusinessResult>;
     businessStateList: StateData<BusinessResult[]>;
+    expenseStateList: StateData<ExpenseResult[]>;
     setOtpSecretState: (state: StateData<string>) => void;
     setPublicPostListState: (state: StateDataPage<PostResult[]>) => void;
     setPrivatePostListState: (state: StateDataPage<PostResult[]>) => void;
@@ -39,6 +41,7 @@ type GlobalState = {
     setNearbyDoctorsListState: (state: StateData<BusinessResult[]>) => void;
     setBusinessState: (state: StateData<BusinessResult>) => void;
     setBusinessStateList: (state: StateData<BusinessResult[]>) => void;
+    setExpenseStateList: (state: StateData<ExpenseResult[]>) => void;
 }
 
 const initialStateData = <T>(data: T): StateData<T> => ({
@@ -66,6 +69,7 @@ const useStore = create<GlobalState>()((set) => ({
     businessStateList: initialStateData([] as BusinessResult[]),
     nearbyBusinessListState: initialStateData([] as BusinessResult[]),
     nearbyDoctorsListState: initialStateData([] as BusinessResult[]),
+    expenseStateList: initialStateData([] as ExpenseResult[]),
     setOtpSecretState: (state: StateData<string>) => set(() => ({ otpSecretState: state })),
     setPublicPostListState: (state: StateDataPage<PostResult[]>) => set(() => ({ publicPostListState: state })),
     setPrivatePostListState: (state: StateDataPage<PostResult[]>) => set(() => ({ privatePostListState: state })),
@@ -76,6 +80,7 @@ const useStore = create<GlobalState>()((set) => ({
     setBusinessStateList: (state: StateData<BusinessResult[]>) => set(() => ({ businessStateList: state })),
     setNearbyBusinessListState: (state: StateData<BusinessResult[]>) => set(() => ({ nearbyBusinessListState: state })),
     setNearbyDoctorsListState: (state: StateData<BusinessResult[]>) => set(() => ({ nearbyDoctorsListState: state })),
+    setExpenseStateList: (state: StateData<ExpenseResult[]>) => set(() => ({ expenseStateList: state })),
 }));
 
 export const ResetAllStores = () => {
@@ -90,6 +95,7 @@ export const ResetAllStores = () => {
         businessStateList: initialStateData([] as BusinessResult[]),
         nearbyBusinessListState: initialStateData([] as BusinessResult[]),
         nearbyDoctorsListState: initialStateData([] as BusinessResult[]),
+        expenseStateList: initialStateData([] as ExpenseResult[]),
     }));
 };
 
