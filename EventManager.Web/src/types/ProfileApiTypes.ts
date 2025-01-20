@@ -37,6 +37,9 @@ export type ProfileResult = PublicProfileResult & {
     latitude: number;
     longitude: number;
     roles: Roles[];
+    venueCheckInDateTime: string;
+    giftCheckInDateTime: string;
+    mealCheckInDateTime: string;
 }
 
 export type BaseProfilePayload = {

@@ -33,13 +33,13 @@ export const NearByAlumni: React.FC = () => {
 
         if (diffMinutes > 10 || profileState.data.latitude === 0 || profileState.data.longitude === 0) {
           ApiGlobalStateManager(ProfileServices.UpdateProfileGeo(latitude, longitude), setProfileState).then(() => {
-            ApiGlobalStateManager(ProfileServices.GetProfileNearby(range), setNearbyProfileListState);
+            ApiGlobalStateManager(ProfileServices.GetProfilesNearby(range), setNearbyProfileListState);
             setDisplayProgress(false);
             return;
           });
         }
         else {
-          ApiGlobalStateManager(ProfileServices.GetProfileNearby(range), setNearbyProfileListState);
+          ApiGlobalStateManager(ProfileServices.GetProfilesNearby(range), setNearbyProfileListState);
           setDisplayProgress(false);
           return;
         }

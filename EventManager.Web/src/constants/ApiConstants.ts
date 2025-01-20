@@ -25,8 +25,12 @@ export const ProfileEndPoints = {
 	PostProfile: () => `${ApiBasePath}/profile`,
 	PatchProfile: () => `${ApiBasePath}/profile`,
 	PostProfilePhoto: () => `${ApiBasePath}/profile/photo`,
-	GetProfileNearby: (radiusInKm: number) => `${ApiBasePath}/profile/nearby/${radiusInKm}`,
+	GetProfilesNearby: (radiusInKm: number) => `${ApiBasePath}/profile/nearby/${radiusInKm}`,
+	GetProfilesByPhone: (phone: string) => `${ApiBasePath}/profile/phone/${phone}`,
 	PatchProfileGeo: (lat: number, lon: number) => `${ApiBasePath}/profile/geo/${lat}/${lon}`,
+	CheckInVenue: (id: string) => `${ApiBasePath}/profile/checkin/venue/${id}`,
+	CheckInGift: (id: string) => `${ApiBasePath}/profile/checkin/gift/${id}`,
+	CheckInMeal: (id: string) => `${ApiBasePath}/profile/checkin/meal/${id}`,
 }
 
 export const BusinessEndPoints = {
@@ -70,4 +74,12 @@ export const PostEndPoints = {
 	PostPost: () => `${ApiBasePath}/post`,
 	PatchPost: () => `${ApiBasePath}/post`,
 	DeletePost: (id: string) => `${ApiBasePath}/post/${id}`
+}
+
+export const ExpenseEndPoints = {
+	GetExpenses: () => `${ApiBasePath}/expense`,
+	GetExpenseById: (id: string) => `${ApiBasePath}/expense/${id}`,
+	PostExpense: () => `${ApiBasePath}/expense`,
+	PatchExpense: () => `${ApiBasePath}/expense`,
+	DeleteExpense: (id: string) => `${ApiBasePath}/expense/${id}`
 }

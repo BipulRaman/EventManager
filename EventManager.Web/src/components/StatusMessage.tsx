@@ -15,17 +15,21 @@ export interface IStatusMessageProps {
     currentStatus: CallStatus;
 }
 
+const rootStyle: React.CSSProperties = {
+    marginTop: "1rem",
+};
+
 export const StatusMessage: React.FC<IStatusMessageProps> = (props) => {
     if (!props.display) {
         switch (props.currentStatus) {
             case CallStatus.NotStarted: {
-                return props.notStartedMessage ? <Alert style={props.style} severity="info">{props.notStartedMessage}</Alert> : null;
+                return props.notStartedMessage ? <div style={rootStyle}><Alert style={props.style} severity="info">{props.notStartedMessage}</Alert></div> : null;
             }
             case CallStatus.Success: {
-                return props.successMessage ? <Alert style={props.style} severity="success">{props.successMessage}</Alert> : null;
+                return props.successMessage ? <div style={rootStyle}><Alert style={props.style} severity="success">{props.successMessage}</Alert></div> : null;
             }
             case CallStatus.Failure: {
-                return props.failureMessage ? <Alert style={props.style} severity="error">{props.failureMessage}</Alert> : null;
+                return props.failureMessage ? <div style={rootStyle}><Alert style={props.style} severity="error">{props.failureMessage}</Alert></div> : null;
             }
             case CallStatus.InProgress: {
                 return (
@@ -41,7 +45,7 @@ export const StatusMessage: React.FC<IStatusMessageProps> = (props) => {
                 return null;
         }
     }
-    else{
+    else {
         return null;
     }
 };
