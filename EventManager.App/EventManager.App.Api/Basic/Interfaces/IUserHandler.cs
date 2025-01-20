@@ -19,7 +19,7 @@ public interface IUserHandler
     /// </summary>
     /// <param name="userCreate"></param>
     /// <returns></returns>
-    OpResult<bool> HandleCreateUser(UserCreate userCreate);
+    OpResult<bool> HandleCreateUser(HttpContext httpContext, UserCreate userCreate);
 
     /// <summary>
     /// Handles the update user request.

@@ -5,15 +5,17 @@ namespace EventManager.App.Api.Basic.Models;
 /// <summary>
 /// The <see cref="UserUpdate"/> class represents an user update entity.
 /// </summary>
-public class UserUpdate : User
+public class UserUpdate
 {
-    /// <summary>
-    /// Method to convert UserUpdate to UserEntity
-    /// </summary>
-    /// <param name="userUpdate"></param>
-    /// <param name="httpContext"></param>
-    /// <returns></returns>
-    public UserEntity ToUserEntity(HttpContext httpContext)
+    public string Id { get; set; }
+
+    public string Name { get; set; }
+
+    public string Email { get; set; }
+
+    public string Phone { get; set; }
+
+    public UserEntity ToUpdateUserEntity(HttpContext httpContext, User user)
     {
         User contextUserInfo = (User)httpContext.Items[NameConstants.USER_KEY];
         return new UserEntity
@@ -21,11 +23,13 @@ public class UserUpdate : User
             Name = Name,
             Phone = Phone,
             Email = Email,
-            PartitionKey = contextUserInfo.TenantId,
-            RowKey = contextUserInfo.Id,
-            Roles = contextUserInfo.Roles,
-            CreatedAt = contextUserInfo.CreatedAt,
-            SecurityKey = contextUserInfo.SecurityKey,
+            PartitionKey = user.TenantId,
+            RowKey = user.Id,
+            Roles = Role.User.ToString(),
+            CreatedAt = user.CreatedAt,
+            CreatedBy = user.CreatedBy,
+            ModifiedBy = contextUserInfo.Id,
+            SecurityKey = user.SecurityKey,
         };
     }
 }

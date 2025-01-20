@@ -71,7 +71,7 @@ public class UserRepository : IUserRepository
     ///<inheritdoc/>
     public bool Update(UserEntity userEntity)
     {
-        Response response = tableClient.UpdateEntity(userEntity, ETag.All);
+        Response response = tableClient.UpdateEntity(userEntity, ETag.All, TableUpdateMode.Merge);
         if (response.Status == 204)
         {
             return true;

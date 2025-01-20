@@ -1,4 +1,5 @@
-﻿using EventManager.App.Api.Basic.Constants;
+﻿using System.Text.Json.Serialization;
+using EventManager.App.Api.Basic.Constants;
 
 namespace EventManager.App.Api.Basic.Models;
 
@@ -7,29 +8,15 @@ namespace EventManager.App.Api.Basic.Models;
 /// </summary>
 public class UserEntity : BaseEntity
 {
-    /// <summary>
-    /// Gets or sets the name of the user.
-    /// </summary>
     public string Name { get; set; }
 
-    /// <summary>
-    /// Gets or sets the email of the user.
-    /// </summary>
     public string Email { get; set; }
 
-    /// <summary>
-    /// Gets or sets the phone number of the user.
-    /// </summary>
     public string Phone { get; set; }
 
-    /// <summary>
-    /// Gets or sets the security key of the user.
-    /// </summary>
+    [JsonIgnore]
     public string SecurityKey { get; set; }
 
-    /// <summary>
-    /// Gets or sets the roles assigned to the user.
-    /// </summary>
     public string Roles { get; set; } = Role.User.ToString();
 
     /// <summary>
@@ -49,7 +36,8 @@ public class UserEntity : BaseEntity
                 Phone = userEntity.Phone,
                 SecurityKey = userEntity.SecurityKey,
                 Roles = userEntity.Roles,
-                CreatedAt = userEntity.CreatedAt
+                CreatedAt = userEntity.CreatedAt,
+                CreatedBy = userEntity.CreatedBy
             };
 
             return user;

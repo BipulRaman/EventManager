@@ -51,7 +51,7 @@ public class UserHandler : IUserHandler
         return result;
     }
 
-    public OpResult<bool> HandleCreateUser(UserCreate userCreate)
+    public OpResult<bool> HandleCreateUser(HttpContext httpContext, UserCreate userCreate)
     {
         logger.LogInformation($"{nameof(AuthHandler)}.{nameof(HandleCreateUser)} => Method started for {userCreate.Email}.");
         OpResult<bool> result = new OpResult<bool>
@@ -71,7 +71,7 @@ public class UserHandler : IUserHandler
             }
             else
             {
-                bool response = userRepository.Create((UserEntity)userCreate);
+                bool response = userRepository.Create(userCreate.ToUserEntity(httpContext));
                 if (response is true)
                 {
                     result.Status = HttpStatusCode.OK;
@@ -106,7 +106,8 @@ public class UserHandler : IUserHandler
 
         try
         {
-            UserEntity userEntity = userUpdate.ToUserEntity(httpContext);
+            User user = userRepository.GetById(userUpdate.Id);
+            UserEntity userEntity = userUpdate.ToUpdateUserEntity(httpContext, user);
             bool response = userRepository.Update(userEntity);
             if (response is true)
             {

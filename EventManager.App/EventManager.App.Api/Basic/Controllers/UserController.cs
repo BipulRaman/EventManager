@@ -45,7 +45,7 @@ public class UserController : Controller
     public IActionResult CreateUser(UserCreate userCreate)
     {
         logger.LogInformation($"{nameof(UserController)}.{nameof(CreateUser)} => Started by User: {ContextHelper.GetLoggedInUser(HttpContext)?.Id}.");
-        OpResult<bool> opResult = userHandler.HandleCreateUser(userCreate);
+        OpResult<bool> opResult = userHandler.HandleCreateUser(HttpContext, userCreate);
         logger.LogInformation($"{nameof(UserController)}.{nameof(CreateUser)} => Completed. Response => Status: {opResult.Status}; ErrorCode: {opResult.ErrorCode}.");
         return StatusCode((int)opResult.Status, opResult);
     }

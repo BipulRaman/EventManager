@@ -195,10 +195,14 @@ public class AuthHandler : IAuthHandler
             User contextUserInfo = (User)httpContext.Items[NameConstants.USER_KEY];
             if (contextUserInfo is not null)
             {
-                User userEntity = userService.GetByEmail(contextUserInfo.Email);
-                if (userEntity is not null)
+                User user = userService.GetByEmail(contextUserInfo.Email);
+                UserEntity userEntity = user.ToUserEntity();
+                userEntity.SecurityKey = Guid.NewGuid().ToString();
+                userEntity.ModifiedBy = contextUserInfo.Id;
+
+                if (user is not null)
                 {
-                    userEntity.SecurityKey = Guid.NewGuid().ToString();
+                    user.SecurityKey = Guid.NewGuid().ToString();
                     bool isUserUpdated = userService.Update(userEntity);
 
                     if (isUserUpdated)

@@ -10,68 +10,43 @@ using System.Text.Json.Serialization;
 /// </summary>
 public class User
 {
-    /// <summary>
-    /// Gets or sets the ID of the user.
-    /// </summary>
     public string Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the ID of the user.
-    /// </summary>
     public string TenantId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the name of the user.
-    /// </summary>
     public string Name { get; set; }
 
-    /// <summary>
-    /// Gets or sets the email of the user.
-    /// </summary>
     public string Email { get; set; }
 
-    /// <summary>
-    /// Gets or sets the phone number of the user.
-    /// </summary>
     public string Phone { get; set; }
 
-    /// <summary>
-    /// Gets or sets the security key of the user.
-    /// </summary>
     [JsonIgnore]
     public string SecurityKey { get; set; }
 
-    /// <summary>
-    /// Gets or sets the roles assigned to the user.
-    /// </summary>
     public string Roles { get; set; } = Role.User.ToString();
 
-    /// <summary>
-    /// Gets or sets the creation timestamp of the user entity in the table storage.
-    /// </summary>
     public DateTimeOffset? CreatedAt { get; set; }
+
+    public string CreatedBy { get; set; }
 
     public bool IsValid()
     {
         return !string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Email) && !new EmailAddressAttribute().IsValid(Email) && !string.IsNullOrEmpty(Phone);
     }
 
-    /// Implicit Convert to UserEntity
-    public static implicit operator UserEntity(User user)
+    public UserEntity ToUserEntity()
     {
-        UserEntity userEntity = new UserEntity()
+        return new UserEntity
         {
-            Name = user.Name,
-            Email = user.Email,
-            Phone = user.Phone,
-            SecurityKey = user.SecurityKey,
-            Roles = user.Roles,
-            CreatedAt = user.CreatedAt,
-            PartitionKey = user.TenantId,
-            RowKey = user.Id,
-            Timestamp = user.CreatedAt
+            Name = Name,
+            Phone = Phone,
+            Email = Email,
+            PartitionKey = TenantId,
+            RowKey = Id,
+            Roles = Roles,
+            CreatedAt = CreatedAt,
+            CreatedBy = CreatedBy,
+            SecurityKey = SecurityKey,
         };
-
-        return userEntity;
     }
 }
