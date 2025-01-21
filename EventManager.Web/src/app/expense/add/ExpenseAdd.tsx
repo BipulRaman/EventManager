@@ -1,7 +1,7 @@
 "use client";
 import * as React from 'react';
 import { PageCard } from '../../../components/PageCard';
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material';
 import { StateData } from '../../../state/GlobalState';
 import { ApiComponentStateManager, ApiGlobalStateManager } from '@/utils/ServiceStateHelper';
 import { ExpenseServices } from '@/services/ServicesIndex';
@@ -18,6 +18,8 @@ export const ExpenseAdd: React.FunctionComponent = () => {
     const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
     const [isTouched, setIsTouched] = React.useState<boolean>(false);
     const [expenseCreationState, setExpenseCreationState] = React.useState<StateData<ExpenseResult>>({} as StateData<ExpenseResult>);
+    const [txnType, setTxnType] = React.useState<boolean>(false);
+    const [txnAmount, setTxnAmount] = React.useState<number>(0);
     const [formData, setFormData] = React.useState<CreateExpensePayload>({
         title: '',
         amount: 0,
@@ -33,11 +35,18 @@ export const ExpenseAdd: React.FunctionComponent = () => {
     }
 
     const validateForm = () => {
-        setIsFormValid(isValid_Title(formData.title) && isValid_Amount(formData.amount));
+        setIsFormValid(isValid_Title(formData.title) && isValid_Amount(txnAmount));
     }
 
-
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        if (!isFormValid) return;
+
+        if (txnType === false) {
+            formData.amount = 0 - txnAmount;
+        }
+        else {
+            formData.amount = txnAmount;
+        }
         e.preventDefault();
         ApiComponentStateManager(ExpenseServices.CreateExpense(formData), setExpenseCreationState).then(() => {
             ApiGlobalStateManager(ExpenseServices.GetExpenses(), setExpenseStateList);
@@ -59,6 +68,19 @@ export const ExpenseAdd: React.FunctionComponent = () => {
                     <Typography variant="h6" color="textSecondary" gutterBottom>
                         Add an Expense
                     </Typography>
+                    <FormControl>
+                        <FormLabel id="type-label">Transaction Type</FormLabel>
+                        <RadioGroup
+                            row
+                            aria-labelledby="type-label"
+                            name="transaction-type"
+                            value={txnType.toString()}
+                            onChange={(e) => setTxnType(e.target.value === 'true')}
+                        >
+                            <FormControlLabel value={false} control={<Radio />} label="Debit" />
+                            <FormControlLabel value={true} control={<Radio />} label="Credit" />
+                        </RadioGroup>
+                    </FormControl>
                     <TextField
                         label="Particular"
                         onChange={(e) => { setFormData({ ...formData, title: e.target.value }); setIsTouched(true); }}
@@ -66,8 +88,8 @@ export const ExpenseAdd: React.FunctionComponent = () => {
                     />
                     <TextField
                         label="Amount in ₹"
-                        onChange={(e) => { setFormData({ ...formData, amount: parseFloat(e.target.value) }); setIsTouched(true); }}
-                        error={isTouched && !isValid_Amount(formData.amount)}
+                        onChange={(e) => { setTxnAmount(parseFloat(e.target.value)); setIsTouched(true); }}
+                        error={isTouched && !isValid_Amount(txnAmount)}
                     />
                     <TextField
                         label="Date"
