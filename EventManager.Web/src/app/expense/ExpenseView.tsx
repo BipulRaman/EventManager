@@ -78,7 +78,7 @@ export const ExpenseView: React.FunctionComponent = () => {
                             </TableCell>
                             <TableCell align="right">
                                 <div><b>Amount (₹)</b></div>
-                                <div style={subdetailsStyle}>Total: {Array.isArray(expenseStateList.data) ? expenseStateList.data.reduce((total, row) => total + row.amount, 0) : 0}</div>
+                                <div style={subdetailsStyle}>Total: {Array.isArray(expenseStateList.data) ? expenseStateList.data.filter(row => !createdById || row.createdBy === createdById).reduce((total, row) => total + row.amount, 0) : 0}</div>
                             </TableCell>
                         </TableRow>
                     </TableHead>
