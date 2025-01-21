@@ -17,7 +17,7 @@ export const ExpenseView: React.FunctionComponent = () => {
     const { expenseStateList, setExpenseStateList } = useGlobalState();
 
     React.useEffect(() => {
-        if (!(expenseStateList?.data?.length > 0)) {
+        if (expenseStateList?.status !== CallStatus.Success && !(expenseStateList?.data?.length > 0)) {
             ApiGlobalStateManager(ExpenseServices.GetExpenses(), setExpenseStateList);
         }
     }, [])
