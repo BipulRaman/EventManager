@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import { Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
+import { Alert, Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
@@ -140,16 +140,16 @@ export const ProfileInfoUpdate: React.FunctionComponent = () => {
         <PageCard>
             {formData.id ? (
                 <form onSubmit={handleFormSubmit} onChange={validateForm}>
-                    {isSubmitted && (
-                        <Stack direction='column' spacing={2} margin={2} maxWidth={400}>
+                    <Stack direction='column' spacing={2} margin={2} maxWidth={400}>
+                        {isSubmitted ? (
                             <StatusMessage
                                 notStartedMessage="Go ahead, Update your info👍"
                                 successMessage="Successfully updated."
                                 failureMessage="Something went wrong. Try again."
                                 currentStatus={profileState.status}
                             />
-                        </Stack>
-                    )}
+                        ) : (<Alert severity="info">Go ahead, Update your info👍</Alert>)}
+                    </Stack>
                     <List>
                         <ListItem>
                             <ListItemAvatar>
@@ -468,14 +468,14 @@ export const ProfileInfoUpdate: React.FunctionComponent = () => {
                         <Stack direction='column' spacing={2} margin={2} maxWidth={400}>
                             <Button style={submitButtonStyle} disabled={!isFormValid} variant="contained" type="submit">Update</Button>
                             {
-                                isSubmitted && (
+                                isSubmitted ? (
                                     <StatusMessage
                                         notStartedMessage="Go ahead, Update your info👍"
                                         successMessage="Successfully updated."
                                         failureMessage="Something went wrong. Try again."
                                         currentStatus={profileState.status}
                                     />
-                                )
+                                ) : (<Alert severity="info">Go ahead, Update your info👍</Alert>)
                             }
                         </Stack>
                     </List>
