@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import { Alert, Backdrop, Button, Checkbox, Chip, CircularProgress, Divider, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
+import { Button, Checkbox, Chip, Divider, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
@@ -18,6 +18,7 @@ import { GetUserEmail } from '../../../utils/TokenHelper'
 import useGlobalState from '@/state/GlobalState'
 import { ApiGlobalStateManager } from '@/utils/ServiceStateHelper';
 import { ProfileServices } from '@/services/ServicesIndex';
+import { StatusMessage } from '@/components/StatusMessage';
 
 const submitButtonStyle: React.CSSProperties = {
     width: 150,
@@ -63,7 +64,7 @@ export const ProfileInfoUpdate: React.FunctionComponent = () => {
             populateSelectedSchools();
         }
         else {
-            ApiGlobalStateManager(ProfileServices.GetProfile(), setProfileState).then(() => {populateSelectedSchools()});
+            ApiGlobalStateManager(ProfileServices.GetProfile(), setProfileState).then(() => { populateSelectedSchools() });
         }
     }, []);
 
@@ -139,26 +140,16 @@ export const ProfileInfoUpdate: React.FunctionComponent = () => {
         <PageCard>
             {formData.id ? (
                 <form onSubmit={handleFormSubmit} onChange={validateForm}>
-                    <Stack direction='column' spacing={2} margin={2} maxWidth={400}>
-                        {
-                            profileState.status === CallStatus.Success && isSubmitted &&
-                            (<Alert severity="success">Successfully updated.</Alert>)
-                        }
-                        {
-                            !isSubmitted &&
-                            (<Alert severity="info">Go ahead, Update your info👍</Alert>)
-                        }
-                        {
-                            profileState.status === CallStatus.Failure && isSubmitted &&
-                            (<Alert severity="error">Something went wrong. Try again.</Alert>)
-                        }
-                        <Backdrop
-                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                            open={profileState.status === CallStatus.InProgress}
-                        >
-                            <CircularProgress color="inherit" />
-                        </Backdrop>
-                    </Stack>
+                    {isSubmitted && (
+                        <Stack direction='column' spacing={2} margin={2} maxWidth={400}>
+                            <StatusMessage
+                                notStartedMessage="Go ahead, Update your info👍"
+                                successMessage="Successfully updated."
+                                failureMessage="Something went wrong. Try again."
+                                currentStatus={profileState.status}
+                            />
+                        </Stack>
+                    )}
                     <List>
                         <ListItem>
                             <ListItemAvatar>
@@ -477,23 +468,15 @@ export const ProfileInfoUpdate: React.FunctionComponent = () => {
                         <Stack direction='column' spacing={2} margin={2} maxWidth={400}>
                             <Button style={submitButtonStyle} disabled={!isFormValid} variant="contained" type="submit">Update</Button>
                             {
-                                profileState.status === CallStatus.Success && isSubmitted &&
-                                (<Alert severity="success">Successfully updated.</Alert>)
+                                isSubmitted && (
+                                    <StatusMessage
+                                        notStartedMessage="Go ahead, Update your info👍"
+                                        successMessage="Successfully updated."
+                                        failureMessage="Something went wrong. Try again."
+                                        currentStatus={profileState.status}
+                                    />
+                                )
                             }
-                            {
-                                !isSubmitted &&
-                                (<Alert severity="info">Go ahead, Update your info👍</Alert>)
-                            }
-                            {
-                                profileState.status === CallStatus.Failure && isSubmitted &&
-                                (<Alert severity="error">Something went wrong. Try again.</Alert>)
-                            }
-                            <Backdrop
-                                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                                open={profileState.status === CallStatus.InProgress}
-                            >
-                                <CircularProgress color="inherit" />
-                            </Backdrop>
                         </Stack>
                     </List>
                 </form>
