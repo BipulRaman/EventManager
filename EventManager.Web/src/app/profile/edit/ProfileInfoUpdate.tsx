@@ -21,7 +21,7 @@ import { ProfileServices } from '@/services/ServicesIndex';
 import { StatusMessage } from '@/components/StatusMessage';
 
 const submitButtonStyle: React.CSSProperties = {
-    width: 150,
+    width: 100,
 }
 
 export const ProfileInfoUpdate: React.FunctionComponent = () => {
