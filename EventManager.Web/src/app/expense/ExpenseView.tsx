@@ -5,8 +5,9 @@ import { CallStatus } from "@/types/ApiTypes";
 import { ExpenseServices } from "@/services/ServicesIndex";
 import { ApiGlobalStateManager } from "@/utils/ServiceStateHelper";
 import { StatusMessage } from "@/components/StatusMessage";
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, IconButton } from "@mui/material";
 import { ISODateTimeToReadable } from "@/utils/CommonHelper";
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 const subdetailsStyle: React.CSSProperties = {
     fontSize: '0.7rem',
@@ -55,6 +56,31 @@ export const ExpenseView: React.FunctionComponent = () => {
         return filteredData.reduce((total, row) => total + row.amount, 0);
     }, [filteredData]);
 
+    const handleExportCsv = async () => {
+        try {
+            // export expenseStateList.data by converting json to csv
+            const csvRows = [];
+            // Get the headers
+            const headers = Object.keys(expenseStateList.data[0]);
+            csvRows.push(headers.join(','));
+            // Loop over the rows
+            for (const row of expenseStateList.data) {
+                const values = headers.map(header => {
+                    const escaped = ('' + (row as any)[header]).replace(/"/g, '\\"');
+                    return `"${escaped}"`;
+                });
+                csvRows.push(values.join(','));
+            }
+            const csvString = csvRows.join('\n');
+            const a = document.createElement('a');
+            a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString);
+            a.download = 'expenses.csv';
+            a.click();
+        } catch (error) {
+            console.error('There was an error exporting the data', error);
+        }
+    };
+
     return (
         <>
             <StatusMessage
@@ -93,9 +119,14 @@ export const ExpenseView: React.FunctionComponent = () => {
                     <MenuItem value="Debit">Debit</MenuItem>
                 </Select>
             </FormControl>
+            <div style={{ verticalAlign: 'baseline', float: 'right', paddingTop: '16px' }}>
+                <IconButton color="primary" size="large" onClick={handleExportCsv} >
+                    <DownloadForOfflineIcon />
+                </IconButton>
+            </div>
 
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 300 }} aria-label="simple table">
+                <Table sx={{ minWidth: 300 }}>
                     <TableHead>
                         <TableRow>
                             <TableCell>
