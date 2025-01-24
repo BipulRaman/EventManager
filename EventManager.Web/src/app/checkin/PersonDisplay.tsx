@@ -115,7 +115,6 @@ export const PersonDisplay: React.FunctionComponent<ProfileResult> = (profile: P
             Check-In Venue
           </Button>
           <StatusMessage
-            display={false}
             notStartedMessage="Please enter phone number and click search."
             successMessage={`${profile.name} checked in at venue.`}
             failureMessage="Something went wrong."

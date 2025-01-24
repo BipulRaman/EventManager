@@ -45,7 +45,6 @@ export const CheckinVenue: React.FC = () => {
           <Button onClick={fetchUsersByPhone} endIcon={<PersonSearchIcon />}></Button>
         </Paper>
         <StatusMessage 
-          display= {false}
           notStartedMessage= "Please enter phone number and click search."
           successMessage={`${profileList.data?.length || 0} result(s) found${profileList.data?.length ? ` for ${profileList.data[0]?.phone}` : ''}.`}
           failureMessage="Something went wrong."

@@ -104,7 +104,6 @@ export const ExpenseAdd: React.FunctionComponent = () => {
                     />
                     <Button style={submitButtonStyle} disabled={!isFormValid} variant="contained" type="submit">Submit</Button>
                     <StatusMessage
-                        display={false}
                         notStartedMessage="Please fill the form and submit."
                         successMessage="Expense added successfully."
                         failureMessage="Failed to add expense."

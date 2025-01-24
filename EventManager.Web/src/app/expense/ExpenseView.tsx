@@ -84,13 +84,12 @@ export const ExpenseView: React.FunctionComponent = () => {
     return (
         <>
             <StatusMessage
-                display={false}
                 notStartedMessage="Loading.."
                 successMessage=""
                 failureMessage="Something went wrong."
                 currentStatus={expenseStateList.status}
             />
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>  
                 <InputLabel id="name-label">Filter Name</InputLabel>
                 <Select
                     labelId="name-label"
