@@ -15,7 +15,7 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { ProfileType } from "@/types/ApiTypes";
 import { StatusMessage } from "@/components/StatusMessage";
 import { StateData } from "@/state/GlobalState";
-import { ProfileServices } from "@/services/ServicesIndex";
+import { AttendeeServices } from "@/services/ServicesIndex";
 import { ApiComponentStateManager } from "@/utils/ServiceStateHelper";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 
@@ -46,7 +46,7 @@ export const PersonDisplay: React.FunctionComponent<ProfileResult> = (profile: P
   const [checkedIn, setCheckedIn] = React.useState<StateData<boolean>>({} as StateData<boolean>);
 
   const checkInVenue = () => {
-    ApiComponentStateManager(ProfileServices.CheckInVenue(profile.id), setCheckedIn);
+    ApiComponentStateManager(AttendeeServices.CheckInVenue(profile.id), setCheckedIn);
   }
 
   return (

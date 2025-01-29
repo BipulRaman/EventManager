@@ -8,6 +8,7 @@ import { ExpenseServices } from '@/services/ServicesIndex';
 import { CreateExpensePayload, ExpenseResult } from '@/types/ExpenseApiTypes';
 import { StatusMessage } from '@/components/StatusMessage';
 import useGlobalState from '@/state/GlobalState';
+import { DateTimeToUnix, DateTimeIsoToUnix } from '@/utils/CommonHelper';
 
 const submitButtonStyle: React.CSSProperties = {
     width: 90,
@@ -23,7 +24,7 @@ export const ExpenseAdd: React.FunctionComponent = () => {
     const [formData, setFormData] = React.useState<CreateExpensePayload>({
         title: '',
         amount: 0,
-        dateTime: new Date().toISOString(),
+        dateTime: DateTimeToUnix(new Date()),
     } as CreateExpensePayload);
 
     const isValid_Title = (title: string) => {
@@ -99,8 +100,8 @@ export const ExpenseAdd: React.FunctionComponent = () => {
                                 shrink: true,
                             },
                         }}
-                        value={formData.dateTime.split('T')[0]}
-                        onChange={(e) => setFormData({ ...formData, dateTime: e.target.value })}
+                        value={new Date(formData.dateTime * 1000).toISOString().split('T')[0]}
+                        onChange={(e) => setFormData({ ...formData, dateTime: DateTimeIsoToUnix(e.target.value) })}
                     />
                     <Button style={submitButtonStyle} disabled={!isFormValid} variant="contained" type="submit">Submit</Button>
                     <StatusMessage

@@ -1,5 +1,5 @@
 import { CreateOtpPayload, CreateTokenPayload } from "@/types/AuthApiTypes";
-import { AuthEndPoints, BusinessEndPoints, ExpenseEndPoints, NotificationEndPoints, PostEndPoints, ProfileEndPoints, UserEndPoints } from "../constants/ApiConstants";
+import { AttendeeEndPoints, AuthEndPoints, BusinessEndPoints, ExpenseEndPoints, NotificationEndPoints, PostEndPoints, ProfileEndPoints, UserEndPoints } from "../constants/ApiConstants";
 import { CreateBusinessPayload } from "../types/BusinessApiTypes";
 import AxiosAuthInstance from "../utils/AxiosAuthConfig";
 import { CreateProfilePayload, UpdateProfilePayload } from "@/types/ProfileApiTypes";
@@ -75,6 +75,21 @@ export const ProfileServices = {
     CheckInGift: async (id: string) => createApiCall(HttpMethod.POST, ProfileEndPoints.CheckInGift(id)),
     CheckInMeal: async (id: string) => createApiCall(HttpMethod.POST, ProfileEndPoints.CheckInMeal(id)),
 };
+
+export const AttendeeServices = {
+    GetProfile: async () => createApiCall(HttpMethod.GET, AttendeeEndPoints.GetProfile()),
+    GetProfileById: async (id: string) => createApiCall(HttpMethod.GET, AttendeeEndPoints.GetProfileById(id)),
+    CreateProfile: async (payload: CreateProfilePayload) => createApiCall(HttpMethod.POST, AttendeeEndPoints.PostProfile(), payload),
+    UpdateProfile: async (payload: UpdateProfilePayload) => createApiCall(HttpMethod.PATCH, AttendeeEndPoints.PatchProfile(), payload),
+    UpdateProfilePhoto: async (payload: FormData) => createApiCall(HttpMethod.POST_FORM, AttendeeEndPoints.PostProfilePhoto(), payload),
+    UpdateProfileGeo: async (lat: number, lon: number) => createApiCall(HttpMethod.PATCH, AttendeeEndPoints.PatchProfileGeo(lat, lon)),
+    GetProfilesNearby: async (radiusInKm: number) => createApiCall(HttpMethod.GET, AttendeeEndPoints.GetProfilesNearby(radiusInKm)),
+    GetProfilesByPhone: async (phone: string) => createApiCall(HttpMethod.GET, AttendeeEndPoints.GetProfilesByPhone(phone)),
+    CheckInVenue: async (id: string) => createApiCall(HttpMethod.POST, AttendeeEndPoints.CheckInVenue(id)),
+    CheckInGift: async (id: string) => createApiCall(HttpMethod.POST, AttendeeEndPoints.CheckInGift(id)),
+    CheckInMeal: async (id: string) => createApiCall(HttpMethod.POST, AttendeeEndPoints.CheckInMeal(id)),
+};
+
 export const NotificationServices = {
     GetNotifications: async () => createApiCall(HttpMethod.GET, NotificationEndPoints.GetNotifications()),
     GetNotificationById: async (id: string) => createApiCall(HttpMethod.GET, NotificationEndPoints.GetNotificationById(id)),

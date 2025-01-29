@@ -3,7 +3,8 @@ export const AxiosConfig = {
 	firstRetryAt: 200
 }
 
-export const ApiBasePath = 'https://alumnievent.azurewebsites.net';
+export const ApiBasePath = 'https://alumniapp.azurewebsites.net';
+export const EventId = '72aef99a-cdec-4176-9c3a-0acc493f29b2';
 
 export const AuthEndPoints = {
 	PostAuthOtp: () => `${ApiBasePath}/auth/otp`,
@@ -33,6 +34,20 @@ export const ProfileEndPoints = {
 	CheckInMeal: (id: string) => `${ApiBasePath}/profile/checkin/meal/${id}`,
 }
 
+export const AttendeeEndPoints = {
+	GetProfile: () => `${ApiBasePath}/attendee`,
+	GetProfileById: (id: string) => `${ApiBasePath}/attendee/${id}`,
+	PostProfile: () => `${ApiBasePath}/attendee`,
+	PatchProfile: () => `${ApiBasePath}/attendee`,
+	PostProfilePhoto: () => `${ApiBasePath}/attendee/photo`,
+	GetProfilesNearby: (radiusInKm: number) => `${ApiBasePath}/attendee/nearby/${radiusInKm}`,
+	GetProfilesByPhone: (phone: string) => `${ApiBasePath}/attendee/phone/${phone}`,
+	PatchProfileGeo: (lat: number, lon: number) => `${ApiBasePath}/attendee/geo/${lat}/${lon}`,
+	CheckInVenue: (id: string) => `${ApiBasePath}/attendee/checkin/venue/${id}`,
+	CheckInGift: (id: string) => `${ApiBasePath}/attendee/checkin/gift/${id}`,
+	CheckInMeal: (id: string) => `${ApiBasePath}/attendee/checkin/meal/${id}`,
+}
+
 export const BusinessEndPoints = {
 	GetBusinesses: () => `${ApiBasePath}/business`,
 	GetBusinessesByPincode: (pincode: number) => `${ApiBasePath}/business/nearby/${pincode}`,
@@ -44,6 +59,7 @@ export const BusinessEndPoints = {
 }
 
 export const EventEndPoints = {
+	eventId: 'f453d583-5434-432d-b06c-803c09d72207',
 	GetEvents: () => `${ApiBasePath}/event`,
 	GetEventById: (id: string) => `${ApiBasePath}/event/${id}`,
 	PostEvent: () => `${ApiBasePath}/event`,
@@ -77,9 +93,9 @@ export const PostEndPoints = {
 }
 
 export const ExpenseEndPoints = {
-	GetExpenses: () => `${ApiBasePath}/expense`,
-	GetExpenseById: (id: string) => `${ApiBasePath}/expense/${id}`,
-	PostExpense: () => `${ApiBasePath}/expense`,
-	PatchExpense: () => `${ApiBasePath}/expense`,
-	DeleteExpense: (id: string) => `${ApiBasePath}/expense/${id}`
+	GetExpenses: () => `${ApiBasePath}/expense/${EventId}`,
+	GetExpenseById: (id: string) => `${ApiBasePath}/expense/${EventId}/${id}`,
+	PostExpense: () => `${ApiBasePath}/expense/${EventId}`,
+	PatchExpense: () => `${ApiBasePath}/expense/${EventId}`,
+	DeleteExpense: (id: string) => `${ApiBasePath}/expense/${EventId}/${id}`
 }

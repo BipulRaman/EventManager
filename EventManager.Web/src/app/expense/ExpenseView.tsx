@@ -6,7 +6,7 @@ import { ExpenseServices } from "@/services/ServicesIndex";
 import { ApiGlobalStateManager } from "@/utils/ServiceStateHelper";
 import { StatusMessage } from "@/components/StatusMessage";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, IconButton } from "@mui/material";
-import { ISODateTimeToReadable } from "@/utils/CommonHelper";
+import { UnixDateTimeToReadable } from "@/utils/CommonHelper";
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 const subdetailsStyle: React.CSSProperties = {
@@ -143,7 +143,7 @@ export const ExpenseView: React.FunctionComponent = () => {
                             <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell component="th" scope="row">
                                     <div>{row.title}</div>
-                                    <div style={subdetailsStyle}>{ISODateTimeToReadable(row.dateTime)} | {row.createdByName}</div>
+                                    <div style={subdetailsStyle}>{UnixDateTimeToReadable(row.dateTime)} | {row.createdByName}</div>
                                 </TableCell>
                                 <TableCell align="right">{row.amount}</TableCell>
                             </TableRow>

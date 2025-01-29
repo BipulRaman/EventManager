@@ -23,6 +23,19 @@ export const ISODateTimeToReadable = (isoString: string): string => {
   return finalFormattedDate;
 };
 
+export const UnixDateTimeToReadable = (unixTimestamp: number): string => {
+  const date = new Date(unixTimestamp * 1000);
+  return ISODateTimeToReadable(date.toISOString());
+}
+
+export const DateTimeToUnix = (datetime: Date): number => {
+  return Math.floor(datetime.getTime() / 1000);
+}
+
+export const DateTimeIsoToUnix = (datetime: string): number => {
+  return DateTimeToUnix(new Date(datetime));
+}
+
 export const DateTimeReadable = (datetime: Date): string => {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',

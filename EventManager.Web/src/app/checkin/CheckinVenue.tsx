@@ -5,7 +5,7 @@ import { PersonDisplay } from './PersonDisplay';
 import { Button, Divider, Input, Paper, Typography } from '@mui/material';
 import { ProfileResult } from '../../types/ProfileApiTypes';
 import { ApiComponentStateManager } from '@/utils/ServiceStateHelper';
-import { ProfileServices } from '@/services/ServicesIndex';
+import { AttendeeServices } from '@/services/ServicesIndex';
 import { CallStatus } from '@/types/ApiTypes';
 import { StateData } from '@/state/GlobalState';
 import { StatusMessage } from '@/components/StatusMessage';
@@ -18,7 +18,7 @@ export const CheckinVenue: React.FC = () => {
   const [phone, setPhone] = React.useState<string>("");
 
   const fetchUsersByPhone = () => {
-    ApiComponentStateManager(ProfileServices.GetProfilesByPhone(phone), setProfileList);
+    ApiComponentStateManager(AttendeeServices.GetProfilesByPhone(phone), setProfileList);
     setPhone("");
     setIsTouch(false);
   }
